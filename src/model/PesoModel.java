@@ -40,8 +40,8 @@ public class PesoModel extends BindableModel {
 //        return data;
     }
     
-    // Não sei se funciona
-    public void setUsuario(Usuario usuario) {
-        this.peso.setUsuario(usuario);
-    }
+    // Provavelmente não precisa desse set
+//    public void setUsuario(Usuario usuario) {
+//        this.peso.setUsuario(usuario);
+//    }
 }

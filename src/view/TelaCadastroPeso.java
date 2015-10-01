@@ -61,6 +61,12 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
 
+        // Troquei "text" por "boolean"
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
+                ELProperty.create("${peso.peso_atual}"), pesoAtualCheckBox, BeanProperty.create("boolean"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        
         bindingGroup.bind();
     }
 
@@ -80,6 +86,7 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        pesoAtualCheckBox = new javax.swing.JCheckBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -149,23 +156,31 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        pesoAtualCheckBox.setText("Peso Atual");
+        pesoAtualCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesoAtualCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataField))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dataField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pesoField, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(pesoField)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pesoAtualCheckBox)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -178,7 +193,8 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(pesoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pesoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesoAtualCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -195,7 +211,9 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
             model.convertData(dataField.getText());
-            model.setUsuario(usuarioLogado);
+            model.getPeso().setUsuario(usuarioLogado);
+            // Acho que o model não precisa do setUsuario
+//            model.setUsuario(usuarioLogado);
             controller.savePeso(model.getPeso());
             usuarioLogado.addPeso(model.getPeso());
 
@@ -212,6 +230,10 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
         DesktopManager.remove(DesktopManager.TELA_CADASTRO_PESO);
     }//GEN-LAST:event_formInternalFrameClosed
 
+    private void pesoAtualCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoAtualCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pesoAtualCheckBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -219,6 +241,7 @@ public class TelaCadastroPeso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox pesoAtualCheckBox;
     private javax.swing.JTextField pesoField;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
