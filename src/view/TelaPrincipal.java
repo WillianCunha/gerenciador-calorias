@@ -18,7 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        System.out.println("TESTE");
+        System.out.println("TESTE2");
     }
 
     /**
