@@ -37,6 +37,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Alimento.findByFibras", query = "SELECT a FROM Alimento a WHERE a.fibras = :fibras"),
     @NamedQuery(name = "Alimento.findBySodio", query = "SELECT a FROM Alimento a WHERE a.sodio = :sodio")})
 public class Alimento implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "porcao")
+    private int porcao;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "carboidratos")
     private Float carboidratos;
@@ -190,6 +193,14 @@ public class Alimento implements Serializable {
 
     public void setSodio(Float sodio) {
         this.sodio = sodio;
+    }
+
+    public int getPorcao() {
+        return porcao;
+    }
+
+    public void setPorcao(int porcao) {
+        this.porcao = porcao;
     }
     
 }

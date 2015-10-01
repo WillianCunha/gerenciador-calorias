@@ -32,18 +32,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cadastroUsuarioMenuItem = new javax.swing.JMenuItem();
-        cadastroPesoMenuItem = new javax.swing.JMenuItem();
+        consultaMenu = new javax.swing.JMenu();
+        consultaAlimentoMenuItem = new javax.swing.JMenuItem();
+        consultaRelatorioMenuItem = new javax.swing.JMenuItem();
+        consultaDiarioMenuItem = new javax.swing.JMenuItem();
+        consultaPesoMenuItem = new javax.swing.JMenuItem();
+        cadastroMenu = new javax.swing.JMenu();
         cadastroAlimentoMenuItem = new javax.swing.JMenuItem();
-        cadastroRegistroMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cadastroRelatorioMenuItem = new javax.swing.JMenuItem();
+        cadastroRefeiçãoMenuItem = new javax.swing.JMenuItem();
+        cadastroPesoMenuItem = new javax.swing.JMenuItem();
+        ajudaMenu = new javax.swing.JMenu();
+        sobreMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Calorias");
@@ -54,38 +54,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Consulta");
+        consultaMenu.setMnemonic('f');
+        consultaMenu.setText("Consulta");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Peso");
-        fileMenu.add(openMenuItem);
+        consultaAlimentoMenuItem.setMnemonic('s');
+        consultaAlimentoMenuItem.setText("Alimento");
+        consultaMenu.add(consultaAlimentoMenuItem);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Alimento");
-        fileMenu.add(saveMenuItem);
+        consultaRelatorioMenuItem.setText("Relatório");
+        consultaMenu.add(consultaRelatorioMenuItem);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Registro");
-        fileMenu.add(saveAsMenuItem);
+        consultaDiarioMenuItem.setMnemonic('a');
+        consultaDiarioMenuItem.setText("Diário");
+        consultaMenu.add(consultaDiarioMenuItem);
 
-        menuBar.add(fileMenu);
+        consultaPesoMenuItem.setMnemonic('o');
+        consultaPesoMenuItem.setText("Peso");
+        consultaMenu.add(consultaPesoMenuItem);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Cadastro");
+        menuBar.add(consultaMenu);
 
-        cadastroUsuarioMenuItem.setMnemonic('t');
-        cadastroUsuarioMenuItem.setText("Usuário");
-        editMenu.add(cadastroUsuarioMenuItem);
-
-        cadastroPesoMenuItem.setMnemonic('y');
-        cadastroPesoMenuItem.setText("Peso");
-        cadastroPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroPesoMenuItemActionPerformed(evt);
-            }
-        });
-        editMenu.add(cadastroPesoMenuItem);
+        cadastroMenu.setMnemonic('e');
+        cadastroMenu.setText("Cadastro");
 
         cadastroAlimentoMenuItem.setMnemonic('p');
         cadastroAlimentoMenuItem.setText("Alimento");
@@ -94,24 +84,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 cadastroAlimentoMenuItemActionPerformed(evt);
             }
         });
-        editMenu.add(cadastroAlimentoMenuItem);
+        cadastroMenu.add(cadastroAlimentoMenuItem);
 
-        cadastroRegistroMenuItem.setMnemonic('d');
-        cadastroRegistroMenuItem.setText("Registro");
-        editMenu.add(cadastroRegistroMenuItem);
+        cadastroRelatorioMenuItem.setMnemonic('t');
+        cadastroRelatorioMenuItem.setText("Relatório");
+        cadastroMenu.add(cadastroRelatorioMenuItem);
 
-        menuBar.add(editMenu);
+        cadastroRefeiçãoMenuItem.setMnemonic('d');
+        cadastroRefeiçãoMenuItem.setText("Refeição");
+        cadastroMenu.add(cadastroRefeiçãoMenuItem);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Relatorio");
-        menuBar.add(helpMenu);
+        cadastroPesoMenuItem.setMnemonic('y');
+        cadastroPesoMenuItem.setText("Peso");
+        cadastroPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroPesoMenuItemActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(cadastroPesoMenuItem);
 
-        jMenu1.setText("Ajuda");
+        menuBar.add(cadastroMenu);
 
-        jMenuItem1.setText("Sobre");
-        jMenu1.add(jMenuItem1);
+        ajudaMenu.setText("Ajuda");
 
-        menuBar.add(jMenu1);
+        sobreMenuItem.setText("Sobre");
+        ajudaMenu.add(sobreMenuItem);
+
+        menuBar.add(ajudaMenu);
 
         setJMenuBar(menuBar);
 
@@ -211,20 +210,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu ajudaMenu;
     private javax.swing.JMenuItem cadastroAlimentoMenuItem;
+    private javax.swing.JMenu cadastroMenu;
     private javax.swing.JMenuItem cadastroPesoMenuItem;
-    private javax.swing.JMenuItem cadastroRegistroMenuItem;
-    private javax.swing.JMenuItem cadastroUsuarioMenuItem;
+    private javax.swing.JMenuItem cadastroRefeiçãoMenuItem;
+    private javax.swing.JMenuItem cadastroRelatorioMenuItem;
+    private javax.swing.JMenuItem consultaAlimentoMenuItem;
+    private javax.swing.JMenuItem consultaDiarioMenuItem;
+    private javax.swing.JMenu consultaMenu;
+    private javax.swing.JMenuItem consultaPesoMenuItem;
+    private javax.swing.JMenuItem consultaRelatorioMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JMenuItem sobreMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

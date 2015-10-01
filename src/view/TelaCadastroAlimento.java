@@ -6,6 +6,9 @@
 package view;
 
 import control.AlimentoController;
+import exception.BusinessException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.AlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -43,6 +46,11 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         // Tipo
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
                 ELProperty.create("${alimento.tipo}"), tipoComboBox, BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        // Porção
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
+                ELProperty.create("${alimento.porcao}"), porcaoField, BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
         // Calorias
@@ -106,6 +114,8 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         tipoComboBox = new javax.swing.JComboBox();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        porcaoField = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -147,8 +157,20 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         tipoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Salvar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Porção:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,19 +191,23 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sodioField)
+                            .addComponent(sodioField, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                             .addComponent(fibrasField)
                             .addComponent(gordurasField)
                             .addComponent(proteinasField)
                             .addComponent(nomeField)
-                            .addComponent(caloriasField)
                             .addComponent(carboidratosField)
-                            .addComponent(tipoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(tipoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(caloriasField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(porcaoField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton)))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +223,9 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(caloriasField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(caloriasField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(porcaoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -218,7 +246,7 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sodioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
@@ -231,6 +259,26 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         DesktopManager.remove(DesktopManager.TELA_CADASTRO_ALIMENTO);
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        nomeField.setText("");
+        tipoComboBox.setSelectedItem(null);
+        caloriasField.setText("");
+        porcaoField.setText("");
+        carboidratosField.setText("");
+        proteinasField.setText("");
+        gordurasField.setText("");
+        fibrasField.setText("");
+        sodioField.setText("");
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        try {
+            controller.saveAlimento(model.getAlimento());
+        } catch (BusinessException ex) {
+            Logger.getLogger(TelaCadastroAlimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,7 +295,9 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nomeField;
+    private javax.swing.JTextField porcaoField;
     private javax.swing.JTextField proteinasField;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField sodioField;

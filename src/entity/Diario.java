@@ -38,6 +38,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Diario.findByNumeroRefeicoes", query = "SELECT d FROM Diario d WHERE d.numeroRefeicoes = :numeroRefeicoes"),
     @NamedQuery(name = "Diario.findByTotalCalorico", query = "SELECT d FROM Diario d WHERE d.totalCalorico = :totalCalorico")})
 public class Diario implements Serializable {
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuario usuario;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -145,6 +148,14 @@ public class Diario implements Serializable {
     @Override
     public String toString() {
         return "entity.Diario[ id=" + id + " ]";
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

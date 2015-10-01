@@ -39,6 +39,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Usuario.findByAltura", query = "SELECT u FROM Usuario u WHERE u.altura = :altura"),
     @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")})
 public class Usuario implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Diario> diarioList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -181,6 +183,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "entity.Usuario[ id=" + id + " ]";
+    }
+
+    public List<Diario> getDiarioList() {
+        return diarioList;
+    }
+
+    public void setDiarioList(List<Diario> diarioList) {
+        this.diarioList = diarioList;
     }
     
 }
