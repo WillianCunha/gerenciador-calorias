@@ -12,11 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,37 +23,35 @@ import javax.persistence.Table;
  * @author visitante
  */
 @Entity
-@Table(name = "refeicao")
+@Table(name = "unidade_padrao")
 @NamedQueries({
-    @NamedQuery(name = "Refeicao.findAll", query = "SELECT r FROM Refeicao r"),
-    @NamedQuery(name = "Refeicao.findById", query = "SELECT r FROM Refeicao r WHERE r.id = :id"),
-    @NamedQuery(name = "Refeicao.findByNome", query = "SELECT r FROM Refeicao r WHERE r.nome = :nome")})
-public class Refeicao implements Serializable {
+    @NamedQuery(name = "UnidadePadrao.findAll", query = "SELECT u FROM UnidadePadrao u"),
+    @NamedQuery(name = "UnidadePadrao.findById", query = "SELECT u FROM UnidadePadrao u WHERE u.id = :id"),
+    @NamedQuery(name = "UnidadePadrao.findByDescricao", query = "SELECT u FROM UnidadePadrao u WHERE u.descricao = :descricao")})
+public class UnidadePadrao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nome")
-    private String nome;
-    @JoinColumn(name = "registro_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Registro registro;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "refeicao", fetch = FetchType.LAZY)
+    @Column(name = "descricao")
+    private String descricao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unidadePadrao", fetch = FetchType.LAZY)
+    private List<CaracteristicaAlimento> caracteristicaAlimentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unidadePadrao", fetch = FetchType.LAZY)
     private List<Porcao> porcaoList;
 
-    public Refeicao() {
+    public UnidadePadrao() {
     }
 
-    public Refeicao(Long id) {
+    public UnidadePadrao(Long id) {
         this.id = id;
     }
 
-    public Refeicao(Long id, String nome) {
+    public UnidadePadrao(Long id, String descricao) {
         this.id = id;
-        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public Long getId() {
@@ -68,20 +62,20 @@ public class Refeicao implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Registro getRegistro() {
-        return registro;
+    public List<CaracteristicaAlimento> getCaracteristicaAlimentoList() {
+        return caracteristicaAlimentoList;
     }
 
-    public void setRegistro(Registro registro) {
-        this.registro = registro;
+    public void setCaracteristicaAlimentoList(List<CaracteristicaAlimento> caracteristicaAlimentoList) {
+        this.caracteristicaAlimentoList = caracteristicaAlimentoList;
     }
 
     public List<Porcao> getPorcaoList() {
@@ -102,10 +96,10 @@ public class Refeicao implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Refeicao)) {
+        if (!(object instanceof UnidadePadrao)) {
             return false;
         }
-        Refeicao other = (Refeicao) object;
+        UnidadePadrao other = (UnidadePadrao) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -114,7 +108,7 @@ public class Refeicao implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Refeicao[ id=" + id + " ]";
+        return "entity.UnidadePadrao[ id=" + id + " ]";
     }
     
 }

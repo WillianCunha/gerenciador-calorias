@@ -6,7 +6,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,47 +31,27 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Diario.findAll", query = "SELECT d FROM Diario d"),
     @NamedQuery(name = "Diario.findById", query = "SELECT d FROM Diario d WHERE d.id = :id"),
-    @NamedQuery(name = "Diario.findByData", query = "SELECT d FROM Diario d WHERE d.data = :data"),
-    @NamedQuery(name = "Diario.findByNumeroRefeicoes", query = "SELECT d FROM Diario d WHERE d.numeroRefeicoes = :numeroRefeicoes"),
-    @NamedQuery(name = "Diario.findByTotalCalorico", query = "SELECT d FROM Diario d WHERE d.totalCalorico = :totalCalorico")})
+    @NamedQuery(name = "Diario.findByNome", query = "SELECT d FROM Diario d WHERE d.nome = :nome")})
 public class Diario implements Serializable {
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario usuario;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @Column(name = "data")
-    @Temporal(TemporalType.DATE)
-    private Date data;
-    @Basic(optional = false)
-    @Column(name = "numero_refeicoes")
-    private int numeroRefeicoes;
-    @Basic(optional = false)
-    @Column(name = "total_calorico")
-    private float totalCalorico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diario", fetch = FetchType.LAZY)
-    private List<Refeicao> refeicaoList;
-    @JoinColumn(name = "registro_id", referencedColumnName = "id")
+    @Column(name = "nome")
+    private String nome;
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Registro registro;
+    private Usuario usuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diario", fetch = FetchType.LAZY)
+    private List<Registro> registroList;
 
     public Diario() {
     }
 
     public Diario(Long id) {
         this.id = id;
-    }
-
-    public Diario(Long id, Date data, int numeroRefeicoes, float totalCalorico) {
-        this.id = id;
-        this.data = data;
-        this.numeroRefeicoes = numeroRefeicoes;
-        this.totalCalorico = totalCalorico;
     }
 
     public Long getId() {
@@ -85,44 +62,28 @@ public class Diario implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public String getNome() {
+        return nome;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getNumeroRefeicoes() {
-        return numeroRefeicoes;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNumeroRefeicoes(int numeroRefeicoes) {
-        this.numeroRefeicoes = numeroRefeicoes;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public float getTotalCalorico() {
-        return totalCalorico;
+    public List<Registro> getRegistroList() {
+        return registroList;
     }
 
-    public void setTotalCalorico(float totalCalorico) {
-        this.totalCalorico = totalCalorico;
-    }
-
-    public List<Refeicao> getRefeicaoList() {
-        return refeicaoList;
-    }
-
-    public void setRefeicaoList(List<Refeicao> refeicaoList) {
-        this.refeicaoList = refeicaoList;
-    }
-
-    public Registro getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Registro registro) {
-        this.registro = registro;
+    public void setRegistroList(List<Registro> registroList) {
+        this.registroList = registroList;
     }
 
     @Override
@@ -148,14 +109,6 @@ public class Diario implements Serializable {
     @Override
     public String toString() {
         return "entity.Diario[ id=" + id + " ]";
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
     
 }

@@ -28,19 +28,17 @@ public class PesoController {
         dao.save(peso);
     }
 
-    // Checar contra o banco se o peso é realmente da data mais recente
-
-    public boolean isPesoAtual(Peso peso) {
-        PesoDAO dao = new PesoDAO();
-        List<Peso> listaPeso = dao.findByUsuarioByPesoAtual(model.getPeso().getUsuario(), true);
-        boolean isMaior = false;
+    // Checar qual o peso é atual
+    public Peso PesoAtual(List<Peso> listaPeso) {
+//        PesoDAO dao = new PesoDAO();
+        Peso pesoAtual = new Peso();        
         
-        for (int i = 0; i < listaPeso.size(); i++) {
-            if (peso.getData().compareTo(listaPeso.get(i).getData()) > 0) {
-                isMaior = true;
+        for (int i = 0; i < listaPeso.size() - 1; i++) {
+            if (listaPeso.get(i).getData().compareTo(listaPeso.get(i+1).getData()) > 0) {
+                pesoAtual = listaPeso.get(i);
             }
         }
         
-        return isMaior;
+        return pesoAtual;
     }
 }

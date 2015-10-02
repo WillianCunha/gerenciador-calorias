@@ -35,12 +35,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
     @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login"),
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
-    @NamedQuery(name = "Usuario.findByDataNascimento", query = "SELECT u FROM Usuario u WHERE u.dataNascimento = :dataNascimento"),
     @NamedQuery(name = "Usuario.findByAltura", query = "SELECT u FROM Usuario u WHERE u.altura = :altura"),
+    @NamedQuery(name = "Usuario.findByDataNascimento", query = "SELECT u FROM Usuario u WHERE u.dataNascimento = :dataNascimento"),
     @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")})
 public class Usuario implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Diario> diarioList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,18 +54,18 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
-    @Column(name = "data_nascimento")
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "altura")
     private Float altura;
+    @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    private Date dataNascimento;
     @Column(name = "genero")
     private Character genero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Peso> pesoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Registro> registroList;
+    private List<Diario> diarioList;
 
     public Usuario() {
     }
@@ -115,20 +113,20 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     public Float getAltura() {
         return altura;
     }
 
     public void setAltura(Float altura) {
         this.altura = altura;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Character getGenero() {
@@ -142,22 +140,22 @@ public class Usuario implements Serializable {
     public List<Peso> getPesoList() {
         return pesoList;
     }
-
+    
     // Adicionado addPeso ao modelo
     public void addPeso(Peso peso) {
         this.pesoList.add(peso);
     }
-    
+
     public void setPesoList(List<Peso> pesoList) {
         this.pesoList = pesoList;
     }
 
-    public List<Registro> getRegistroList() {
-        return registroList;
+    public List<Diario> getDiarioList() {
+        return diarioList;
     }
 
-    public void setRegistroList(List<Registro> registroList) {
-        this.registroList = registroList;
+    public void setDiarioList(List<Diario> diarioList) {
+        this.diarioList = diarioList;
     }
 
     @Override
@@ -183,14 +181,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "entity.Usuario[ id=" + id + " ]";
-    }
-
-    public List<Diario> getDiarioList() {
-        return diarioList;
-    }
-
-    public void setDiarioList(List<Diario> diarioList) {
-        this.diarioList = diarioList;
     }
     
 }

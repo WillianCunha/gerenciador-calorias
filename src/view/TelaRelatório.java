@@ -9,12 +9,12 @@ package view;
  *
  * @author visitante
  */
-public class TelaRelatorio extends javax.swing.JPanel {
+public class TelaRelatório extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form TelaRelatorio
+     * Creates new form TelaRelatório
      */
-    public TelaRelatorio() {
+    public TelaRelatório() {
         initComponents();
     }
 
@@ -27,16 +27,22 @@ public class TelaRelatorio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Relatório");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 

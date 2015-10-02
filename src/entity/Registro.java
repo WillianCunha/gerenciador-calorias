@@ -34,7 +34,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Registro.findAll", query = "SELECT r FROM Registro r"),
     @NamedQuery(name = "Registro.findById", query = "SELECT r FROM Registro r WHERE r.id = :id"),
-    @NamedQuery(name = "Registro.findByDataInicio", query = "SELECT r FROM Registro r WHERE r.dataInicio = :dataInicio")})
+    @NamedQuery(name = "Registro.findByData", query = "SELECT r FROM Registro r WHERE r.data = :data"),
+    @NamedQuery(name = "Registro.findByHora", query = "SELECT r FROM Registro r WHERE r.hora = :hora")})
 public class Registro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,14 +44,18 @@ public class Registro implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "data_inicio")
+    @Column(name = "data")
     @Temporal(TemporalType.DATE)
-    private Date dataInicio;
+    private Date data;
+    @Basic(optional = false)
+    @Column(name = "hora")
+    @Temporal(TemporalType.TIME)
+    private Date hora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "registro", fetch = FetchType.LAZY)
-    private List<Diario> diarioList;
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private List<Refeicao> refeicaoList;
+    @JoinColumn(name = "diario_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario usuario;
+    private Diario diario;
 
     public Registro() {
     }
@@ -59,9 +64,10 @@ public class Registro implements Serializable {
         this.id = id;
     }
 
-    public Registro(Long id, Date dataInicio) {
+    public Registro(Long id, Date data, Date hora) {
         this.id = id;
-        this.dataInicio = dataInicio;
+        this.data = data;
+        this.hora = hora;
     }
 
     public Long getId() {
@@ -72,28 +78,36 @@ public class Registro implements Serializable {
         this.id = id;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    public List<Diario> getDiarioList() {
-        return diarioList;
+    public Date getHora() {
+        return hora;
     }
 
-    public void setDiarioList(List<Diario> diarioList) {
-        this.diarioList = diarioList;
+    public void setHora(Date hora) {
+        this.hora = hora;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public List<Refeicao> getRefeicaoList() {
+        return refeicaoList;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setRefeicaoList(List<Refeicao> refeicaoList) {
+        this.refeicaoList = refeicaoList;
+    }
+
+    public Diario getDiario() {
+        return diario;
+    }
+
+    public void setDiario(Diario diario) {
+        this.diario = diario;
     }
 
     @Override

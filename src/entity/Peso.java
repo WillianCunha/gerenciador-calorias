@@ -31,13 +31,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Peso.findAll", query = "SELECT p FROM Peso p"),
     @NamedQuery(name = "Peso.findById", query = "SELECT p FROM Peso p WHERE p.id = :id"),
-    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso"),
     @NamedQuery(name = "Peso.findByData", query = "SELECT p FROM Peso p WHERE p.data = :data"),
-    @NamedQuery(name = "Peso.findByPesoAtual", query = "SELECT p FROM Peso p WHERE p.pesoAtual = :pesoAtual")})
+    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso")})
 public class Peso implements Serializable {
-    @Column(name = "data")
-    @Temporal(TemporalType.DATE)
-    private Date data;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,27 +41,27 @@ public class Peso implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
+    @Column(name = "data")
+    @Temporal(TemporalType.DATE)
+    private Date data;
+    @Basic(optional = false)
     @Column(name = "peso")
     private float peso;
-    @Column(name = "peso_atual")
-    private Boolean pesoAtual;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuario;
 
-    // Incluí a inicialização do usuario
     public Peso() {
-        usuario = new Usuario();
     }
 
     public Peso(Long id) {
         this.id = id;
     }
 
-    public Peso(Long id, float peso, Date data) {
+    public Peso(Long id, Date data, float peso) {
         this.id = id;
-        this.peso = peso;
         this.data = data;
+        this.peso = peso;
     }
 
     public Long getId() {
@@ -76,21 +72,20 @@ public class Peso implements Serializable {
         this.id = id;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
     public float getPeso() {
         return peso;
     }
 
     public void setPeso(float peso) {
         this.peso = peso;
-    }
-
-
-    public Boolean getPesoAtual() {
-        return pesoAtual;
-    }
-
-    public void setPesoAtual(Boolean pesoAtual) {
-        this.pesoAtual = pesoAtual;
     }
 
     public Usuario getUsuario() {
@@ -124,14 +119,6 @@ public class Peso implements Serializable {
     @Override
     public String toString() {
         return "entity.Peso[ id=" + id + " ]";
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
     
 }

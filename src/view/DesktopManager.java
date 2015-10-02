@@ -18,6 +18,8 @@ public class DesktopManager {
     public static final String TELA_CADASTRO_PESO = "telacadastropeso";
     // Adicionado para trabalhar com a Tela Cadastro Alimento
     public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
+    // Adicionado para trabalhar com a Tela Cadastro Refeicao
+    public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
 
     private static Map<String, Component> windows;
 

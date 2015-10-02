@@ -5,11 +5,8 @@
  */
 package view;
 
-import control.AlimentoController;
-import exception.BusinessException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.AlimentoModel;
+import control.RefeicaoController;
+import model.RefeicaoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -19,39 +16,32 @@ import org.jdesktop.beansbinding.ELProperty;
 
 /**
  *
- * @author Aluca
+ * @author visitante
  */
-public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
+public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
 
-    private final AlimentoModel model;
-    private final AlimentoController controller;
-    
+    private final RefeicaoModel model;
+    private final RefeicaoController controller;
     /**
-     * Creates new form TelaCadastroAlimento
+     * Creates new form TelaCadastroRefeicao
      */
-    public TelaCadastroAlimento() {
+    public TelaCadastroRefeicao() {
         initComponents();
-        model = new AlimentoModel();
-        controller = new AlimentoController(model);
+        model = new RefeicaoModel();
+        controller = new RefeicaoController(model);
         doBindings();
     }
-    
+
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
+        
         // Nome
         Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
-                ELProperty.create("${alimento.nome}"), nomeField, BeanProperty.create("text"));
+                ELProperty.create("${refeicao.nome}"), nomeField, BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        // Tipo
-        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
-                ELProperty.create("${alimento.tipo}"), tipoComboBox, BeanProperty.create("text"));
-        binding.setSourceUnreadableValue("");
-        bindingGroup.addBinding(binding);        
-        
-        bindingGroup.bind();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,18 +52,18 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         nomeField = new javax.swing.JTextField();
-        tipoComboBox = new javax.swing.JComboBox();
-        cancelButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        addAlimentoButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        addCaracteristicaButton = new javax.swing.JButton();
+        removeAlimentoButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Cadastro de Alimento");
+        setTitle("Cadastro de Refeição");
+        setToolTipText("");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -94,23 +84,7 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome:");
 
-        jLabel2.setText("Tipo:");
-
-        tipoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cancelButton.setText("Cancelar");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
-        saveButton.setText("Salvar");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
+        addAlimentoButton.setText("Adicionar Alimento");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +99,16 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        addCaracteristicaButton.setText("Adicionar Característica");
+        removeAlimentoButton.setText("Remover Alimento");
+
+        saveButton.setText("Salvar");
+
+        cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,23 +118,22 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addAlimentoButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeAlimentoButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tipoComboBox, 0, 120, Short.MAX_VALUE)
-                                    .addComponent(nomeField)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addCaracteristicaButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(saveButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,51 +143,40 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addCaracteristicaButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(saveButton))
-                .addContainerGap())
+                    .addComponent(addAlimentoButton)
+                    .addComponent(removeAlimentoButton))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        DesktopManager.remove(DesktopManager.TELA_CADASTRO_ALIMENTO);
+        DesktopManager.remove(DesktopManager.TELA_CADASTRO_REFEICAO);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO eliminar alimentos que foram incluídos
         nomeField.setText("");
-        tipoComboBox.setSelectedItem(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            controller.saveAlimento(model.getAlimento());
-        } catch (BusinessException ex) {
-            Logger.getLogger(TelaCadastroAlimento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCaracteristicaButton;
+    private javax.swing.JButton addAlimentoButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nomeField;
+    private javax.swing.JButton removeAlimentoButton;
     private javax.swing.JButton saveButton;
-    private javax.swing.JComboBox tipoComboBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -92,6 +92,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         cadastroRefeiçãoMenuItem.setMnemonic('d');
         cadastroRefeiçãoMenuItem.setText("Refeição");
+        cadastroRefeiçãoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroRefeiçãoMenuItemActionPerformed(evt);
+            }
+        });
         cadastroMenu.add(cadastroRefeiçãoMenuItem);
 
         cadastroPesoMenuItem.setMnemonic('y');
@@ -108,6 +113,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ajudaMenu.setText("Ajuda");
 
         sobreMenuItem.setText("Sobre");
+        sobreMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobreMenuItemActionPerformed(evt);
+            }
+        });
         ajudaMenu.add(sobreMenuItem);
 
         menuBar.add(ajudaMenu);
@@ -134,8 +144,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastroPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroPesoMenuItemActionPerformed
-        // TODO add your handling code here:
-
         TelaCadastroPeso frame;
 
         if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_PESO)) {
@@ -151,7 +159,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroPesoMenuItemActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
         if (SessionManager.getUsuarioLogado() == null) {
             TelaLogin login = new TelaLogin(this, true);
             login.setLocationRelativeTo(null);
@@ -161,7 +168,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void cadastroAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroAlimentoMenuItemActionPerformed
         TelaCadastroAlimento frame;
-        
+
         if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_ALIMENTO)) {
             frame = (TelaCadastroAlimento) DesktopManager.get(DesktopManager.TELA_CADASTRO_ALIMENTO);
             desktopPane.setSelectedFrame(frame);
@@ -173,6 +180,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         frame.show();
     }//GEN-LAST:event_cadastroAlimentoMenuItemActionPerformed
+
+    private void cadastroRefeiçãoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroRefeiçãoMenuItemActionPerformed
+        TelaCadastroRefeicao frame;
+
+        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_REFEICAO)) {
+            frame = (TelaCadastroRefeicao) DesktopManager.get(DesktopManager.TELA_CADASTRO_REFEICAO);
+            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new TelaCadastroRefeicao();
+            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.TELA_CADASTRO_REFEICAO, frame);
+        }
+        frame.show();
+    }//GEN-LAST:event_cadastroRefeiçãoMenuItemActionPerformed
+
+    private void sobreMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreMenuItemActionPerformed
+        TelaSobre.main(null);
+    }//GEN-LAST:event_sobreMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
