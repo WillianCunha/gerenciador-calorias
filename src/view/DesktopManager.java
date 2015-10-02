@@ -16,10 +16,14 @@ import java.util.Map;
 public class DesktopManager {
 
     public static final String TELA_CADASTRO_PESO = "telacadastropeso";
-    // Adicionado para trabalhar com a Tela Cadastro Alimento
+    // Adicionado para trabalhar com a TelaCadastroAlimento
     public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
-    // Adicionado para trabalhar com a Tela Cadastro Refeicao
+    // Adicionado para trabalhar com a TelaCadastroRefeicao
     public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
+    // Adicionado para trabalhar com a TelaConsultaPeso
+    public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
+    // Adicionado para trabalhar com a TelaConsultaAlimento
+    public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
 
     private static Map<String, Component> windows;
 

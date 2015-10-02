@@ -59,17 +59,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         consultaAlimentoMenuItem.setMnemonic('s');
         consultaAlimentoMenuItem.setText("Alimento");
+        consultaAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaAlimentoMenuItemActionPerformed(evt);
+            }
+        });
         consultaMenu.add(consultaAlimentoMenuItem);
 
         consultaRelatorioMenuItem.setText("Relatório");
+        consultaRelatorioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaRelatorioMenuItemActionPerformed(evt);
+            }
+        });
         consultaMenu.add(consultaRelatorioMenuItem);
 
         consultaDiarioMenuItem.setMnemonic('a');
         consultaDiarioMenuItem.setText("Diário");
+        consultaDiarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaDiarioMenuItemActionPerformed(evt);
+            }
+        });
         consultaMenu.add(consultaDiarioMenuItem);
 
         consultaPesoMenuItem.setMnemonic('o');
         consultaPesoMenuItem.setText("Peso");
+        consultaPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPesoMenuItemActionPerformed(evt);
+            }
+        });
         consultaMenu.add(consultaPesoMenuItem);
 
         menuBar.add(consultaMenu);
@@ -199,6 +219,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void sobreMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreMenuItemActionPerformed
         TelaSobre.main(null);
     }//GEN-LAST:event_sobreMenuItemActionPerformed
+
+    private void consultaAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaAlimentoMenuItemActionPerformed
+        TelaConsultaAlimento frame;
+
+        if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_ALIMENTO)) {
+            frame = (TelaConsultaAlimento) DesktopManager.get(DesktopManager.TELA_CONSULTA_ALIMENTO);
+            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new TelaConsultaAlimento();
+            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.TELA_CONSULTA_ALIMENTO, frame);
+        }
+        frame.show();
+    }//GEN-LAST:event_consultaAlimentoMenuItemActionPerformed
+
+    private void consultaRelatorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaRelatorioMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaRelatorioMenuItemActionPerformed
+
+    private void consultaDiarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaDiarioMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaDiarioMenuItemActionPerformed
+
+    private void consultaPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPesoMenuItemActionPerformed
+        TelaConsultaPeso frame;
+
+        if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_PESO)) {
+            frame = (TelaConsultaPeso) DesktopManager.get(DesktopManager.TELA_CONSULTA_PESO);
+            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new TelaConsultaPeso();
+            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.TELA_CONSULTA_PESO, frame);
+        }
+        frame.show();
+    }//GEN-LAST:event_consultaPesoMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
