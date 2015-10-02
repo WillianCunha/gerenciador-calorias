@@ -7,6 +7,7 @@ package control;
 
 import dao.PesoDAO;
 import entity.Peso;
+import entity.Usuario;
 import exception.BusinessException;
 import java.util.List;
 import model.PesoModel;
@@ -26,6 +27,14 @@ public class PesoController {
     public void savePeso(Peso peso) throws BusinessException {
         PesoDAO dao = new PesoDAO();
         dao.save(peso);
+    }
+    
+    // Colocar um método que apresenta a lista de peso?
+    public List<Peso> listPeso(Usuario usuario) {
+        List<Peso> list = null;
+        PesoDAO dao = new PesoDAO();
+        list = dao.findByUsuarioByPeso(usuario);
+        return list;
     }
 
     // Checar qual o peso é atual

@@ -52,13 +52,24 @@ public class PesoDAO implements IDAO<Peso> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Peso> findByUsuarioByPesoAtual(Usuario usuario, boolean pesoAtual) {
+    public List<Peso> findByUsuarioByPeso(Usuario usuario) {
         List<Peso> list = null;
         TypedQuery<Peso> query = em.createNamedQuery("Peso.findByUsuarioByPesoAtual", Peso.class);
-        query.setParameter("usuario", usuario);
-        query.setParameter("pesoAtual", pesoAtual);
+        query.setParameter("usuario", usuario);        
         list = query.getResultList();
         em.close();
         return list;
     }
+    
+    // Comentei porque não será mais usado o pesoAtual, mas ainda precisa pesquisar
+    // por usuário
+//    public List<Peso> findByUsuarioByPesoAtual(Usuario usuario, boolean pesoAtual) {
+//        List<Peso> list = null;
+//        TypedQuery<Peso> query = em.createNamedQuery("Peso.findByUsuarioByPesoAtual", Peso.class);
+//        query.setParameter("usuario", usuario);
+//        query.setParameter("pesoAtual", pesoAtual);
+//        list = query.getResultList();
+//        em.close();
+//        return list;
+//    }
 }

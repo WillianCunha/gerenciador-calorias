@@ -32,7 +32,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Peso.findAll", query = "SELECT p FROM Peso p"),
     @NamedQuery(name = "Peso.findById", query = "SELECT p FROM Peso p WHERE p.id = :id"),
     @NamedQuery(name = "Peso.findByData", query = "SELECT p FROM Peso p WHERE p.data = :data"),
-    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso")})
+    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso"),
+    // Adicionado por mim
+    @NamedQuery(name = "Peso.findByUsuarioByPesoAtual", query = "SELECT p FROM Peso p WHERE p.usuario = :usuario")})
 public class Peso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

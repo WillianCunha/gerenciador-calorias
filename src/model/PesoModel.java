@@ -6,10 +6,8 @@
 package model;
 
 import entity.Peso;
-import entity.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *
