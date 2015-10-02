@@ -34,11 +34,9 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         SistemaGerenciadorCaloriasPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("SistemaGerenciadorCaloriasPU").createEntityManager();
         alimentoQuery = java.beans.Beans.isDesignTime() ? null : SistemaGerenciadorCaloriasPUEntityManager.createQuery("SELECT a FROM Alimento a");
-        alimentoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alimentoQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         valorField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -56,9 +54,6 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alimentoList, jTable1);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
         atributoField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "Tipo" }));
@@ -111,8 +106,6 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
                     .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void valorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorFieldKeyReleased
@@ -144,8 +137,8 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
             alimentoQuery.setParameter("param", "%" + valor + "%");
         }
         
-        alimentoList.clear();
-        alimentoList.addAll(alimentoQuery.getResultList());
+//        alimentoList.clear();
+//        alimentoList.addAll(alimentoQuery.getResultList());
     }//GEN-LAST:event_valorFieldKeyReleased
 
     public static void main(String[] args) {
@@ -188,7 +181,6 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager SistemaGerenciadorCaloriasPUEntityManager;
-    private java.util.List<model.Alimento> alimentoList;
     private javax.persistence.Query alimentoQuery;
     private javax.swing.JComboBox atributoField;
     private javax.swing.JButton jButton1;
@@ -198,6 +190,5 @@ public class TelaConsultaAlimento extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField valorField;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

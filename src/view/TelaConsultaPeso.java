@@ -30,11 +30,9 @@ public class TelaConsultaPeso extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("SistemaGerenciadorCaloriasPU").createEntityManager();
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Peso p");
-        list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : query.getResultList();
         jLabel1 = new javax.swing.JLabel();
         valorField = new javax.swing.JTextField();
         atributoField = new javax.swing.JComboBox();
@@ -54,15 +52,6 @@ public class TelaConsultaPeso extends javax.swing.JPanel {
 
         atributoField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data", "Peso" }));
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, jTable1);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${data}"));
-        columnBinding.setColumnName("Data");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${peso}"));
-        columnBinding.setColumnName("Peso");
-        columnBinding.setColumnClass(Float.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Novo");
@@ -111,8 +100,6 @@ public class TelaConsultaPeso extends javax.swing.JPanel {
                     .addComponent(jButton3))
                 .addContainerGap())
         );
-
-        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void valorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorFieldKeyReleased
@@ -133,8 +120,8 @@ public class TelaConsultaPeso extends javax.swing.JPanel {
             query.setParameter("param", "%" + valor + "%");
         }
 
-        list.clear();
-        list.addAll(query.getResultList());
+//        list.clear();
+//        list.addAll(query.getResultList());
     }//GEN-LAST:event_valorFieldKeyReleased
 
 
@@ -147,10 +134,8 @@ public class TelaConsultaPeso extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.util.List<model.Peso> list;
     private javax.persistence.Query query;
     private javax.swing.JTextField valorField;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 public static void main(String[] args) {
         /* Set the Nimbus look and feel */
