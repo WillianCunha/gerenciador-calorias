@@ -13,10 +13,20 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Observable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.PesoModel;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Binding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.ELProperty;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 import session.SessionManager;
 
 /**
@@ -27,6 +37,7 @@ public class TelaConsultaPeso extends javax.swing.JInternalFrame {
 
     private List<Peso> pesoList = Collections.emptyList();
     private Peso pesoSelecionado;
+    private BindingGroup bindingGroup;
     private final Usuario usuarioLogado;
     private final PesoModel model;
     private final PesoController controller;    
@@ -37,7 +48,39 @@ public class TelaConsultaPeso extends javax.swing.JInternalFrame {
         usuarioLogado = SessionManager.getUsuarioLogado();
         initComponents();
         model = new PesoModel();
-        controller = new PesoController(model);        
+        controller = new PesoController(model);
+        myInitComponents();
+    }
+    
+    private void myInitComponents() {
+        bindingGroup = new BindingGroup();
+        pesoList = ObservableCollections.observableList(controller.listPeso(usuarioLogado));
+        masterTable.setModel(new PesoTableModel(pesoList));
+        
+        JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, pesoList, masterTable);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${data}"));
+        columnBinding.setColumnName("Data");
+        columnBinding.setColumnClass(Date.class);
+        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${peso}"));
+        columnBinding.setColumnName("Peso");
+        columnBinding.setColumnClass(Float.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        
+        Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, masterTable, ELProperty.create("${selectedElement.data}"), dataField, BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("null");
+        bindingGroup.addBinding(binding);
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, masterTable, ELProperty.create("${selectedElement != null}"), dataField, BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+        
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, masterTable, ELProperty.create("${selectedElement.peso}"), pesoField, BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("null");
+        bindingGroup.addBinding(binding);
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, masterTable, ELProperty.create("${selectedElement != null}"), pesoField, BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+        
+        bindingGroup.bind();
+        
     }
 
     /**
@@ -92,7 +135,14 @@ public class TelaConsultaPeso extends javax.swing.JInternalFrame {
         atributoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data", "Peso" }));
         atributoComboBox.setToolTipText("Tipo da pesquisa a ser feita");
 
-        masterTable.setModel(new PesoTableModel());
+        masterTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(masterTable);
 
         newButton.setText("Novo");

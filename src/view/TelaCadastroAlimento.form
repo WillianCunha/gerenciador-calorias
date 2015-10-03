@@ -117,6 +117,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="addAtributoButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Atributo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAtributoButtonActionPerformed"/>
+      </Events>
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -165,13 +173,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="addAtributoButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Adicionar Atributo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAtributoButtonActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

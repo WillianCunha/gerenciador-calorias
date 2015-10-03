@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,6 +39,8 @@ import javax.persistence.TemporalType;
     // Adicionado por mim
     @NamedQuery(name = "Peso.findByUsuarioByPesoAtual", query = "SELECT p FROM Peso p WHERE p.usuario = :usuario")})
 public class Peso implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +76,9 @@ public class Peso implements Serializable {
     }
 
     public void setId(Long id) {
+        Long oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Date getData() {
@@ -79,7 +86,9 @@ public class Peso implements Serializable {
     }
 
     public void setData(Date data) {
+        Date oldData = this.data;
         this.data = data;
+        changeSupport.firePropertyChange("data", oldData, data);
     }
 
     public float getPeso() {
@@ -87,7 +96,9 @@ public class Peso implements Serializable {
     }
 
     public void setPeso(float peso) {
+        float oldPeso = this.peso;
         this.peso = peso;
+        changeSupport.firePropertyChange("peso", oldPeso, peso);
     }
 
     public Usuario getUsuario() {
@@ -95,7 +106,9 @@ public class Peso implements Serializable {
     }
 
     public void setUsuario(Usuario usuario) {
+        Usuario oldUsuario = this.usuario;
         this.usuario = usuario;
+        changeSupport.firePropertyChange("usuario", oldUsuario, usuario);
     }
 
     @Override
@@ -121,6 +134,14 @@ public class Peso implements Serializable {
     @Override
     public String toString() {
         return "entity.Peso[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

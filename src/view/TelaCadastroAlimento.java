@@ -70,9 +70,9 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         tipoComboBox = new javax.swing.JComboBox();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        addAtributoButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
-        addAtributoButton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -115,6 +115,13 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
             }
         });
 
+        addAtributoButton.setText("Adicionar Atributo");
+        addAtributoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAtributoButtonActionPerformed(evt);
+            }
+        });
+
         masterTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -135,13 +142,6 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(masterTable);
-
-        addAtributoButton.setText("Adicionar Atributo");
-        addAtributoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAtributoButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
