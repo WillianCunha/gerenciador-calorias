@@ -59,6 +59,7 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
         removeAlimentoButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        createAlimento = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -110,6 +111,8 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
             }
         });
 
+        createAlimento.setText("Cadastrar Alimento");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,23 +120,22 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nomeField))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addAlimentoButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removeAlimentoButton)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)))
+                        .addComponent(saveButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addAlimentoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeAlimentoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createAlimento)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -148,7 +150,8 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addAlimentoButton)
-                    .addComponent(removeAlimentoButton))
+                    .addComponent(removeAlimentoButton)
+                    .addComponent(createAlimento))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
@@ -172,6 +175,7 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAlimentoButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton createAlimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

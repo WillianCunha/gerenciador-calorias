@@ -17,13 +17,18 @@ public enum AlimentoEnum {
     CEREAL_INTEGRAL(3, "Cereal Integral"),
     LACTEO(4, "Lácteo"),
     OLEO_VEGETAL(5, "Óleo Vegetal"),
-    LEGUMINOSO(6, "Leguminoso"),
+    LEGUMINOSA(6, "Leguminosa"),
     CARNE_VERMELHA(7, "Carne Vermelha"),
     AVE(8, "Ave"),
     PEIXE(9, "Peixe"),
     FRUTO_DO_MAR(10, "Fruto do Mar"),
     OVO(11, "Ovo"),
-    DOCE(12, "Doce");
+    DOCE(12, "Doce"),
+    ACUCAR(13, "Açúcar"),
+    SALGADO(14, "Salgado"),
+    BEBIDA(15, "Bebida"),
+    CASTANHA(16, "Castanha"),
+    SEMENTE(17, "Semente");
 
     private final int valor;
     private final String descricao;
