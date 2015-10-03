@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JDesktopPane;
 import session.SessionManager;
 
 /**

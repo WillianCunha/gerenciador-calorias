@@ -24,6 +24,8 @@ public class DesktopManager {
     public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
     // Adicionado para trabalhar com a TelaConsultaAlimento
     public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
+    // Adicionado para trabalhar com a TelaCadastroAtributo
+    public static final String TELA_CADASTRO_ATRIBUTO = "telacadastroatributo";
 
     private static Map<String, Component> windows;
 

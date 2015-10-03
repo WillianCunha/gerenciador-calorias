@@ -6,11 +6,11 @@
 package view;
 
 import control.AlimentoController;
-import entity.Alimento;
 import exception.BusinessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDesktopPane;
 import model.AlimentoEnum;
 import model.AlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
@@ -28,7 +28,7 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
 
     private final AlimentoModel model;
     private final AlimentoController controller;
-    
+
     /**
      * Creates new form TelaCadastroAlimento
      */
@@ -38,7 +38,7 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         controller = new AlimentoController(model);
         doBindings();
     }
-    
+
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
         // Nome
@@ -50,8 +50,8 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
                 ELProperty.create("${alimento.tipo}"), tipoComboBox, BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
-        bindingGroup.addBinding(binding);        
-        
+        bindingGroup.addBinding(binding);
+
         bindingGroup.bind();
     }
 
@@ -125,10 +125,23 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
             new String [] {
                 "Descrição", "Valor", "Unidade", "Porção"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(masterTable);
 
         addAtributoButton.setText("Adicionar Atributo");
+        addAtributoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAtributoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,6 +208,22 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaCadastroAlimento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void addAtributoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAtributoButtonActionPerformed
+        TelaCadastroAtributo frame = null;
+        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_ATRIBUTO)) {
+            frame = (TelaCadastroAtributo) DesktopManager.get(DesktopManager.TELA_CADASTRO_ATRIBUTO);
+            getDesktopPane().setSelectedFrame(frame);
+//            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new TelaCadastroAtributo();
+            getDesktopPane().add(frame);
+//            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.TELA_CADASTRO_ATRIBUTO, frame);
+        }
+        frame.show();
+    }//GEN-LAST:event_addAtributoButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
