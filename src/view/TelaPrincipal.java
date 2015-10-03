@@ -17,8 +17,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
-        initComponents();
-        System.out.println("TESTE2");
+        initComponents();        
     }
 
     /**
