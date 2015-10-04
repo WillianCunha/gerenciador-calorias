@@ -196,7 +196,9 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             }
             int row = masterTable.getSelectedRow();
             if (row >= 0) {
-                CaracteristicaAlimento c = model.get
+                CaracteristicaAlimento c = model.getCaracteristicaAlimentos().get(row);
+                model.setBackupRegistroCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
+                model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
             }
         }
         
