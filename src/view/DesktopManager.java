@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class DesktopManager {
 
-    public static final String TELA_CADASTRO_PESO = "telacadastropeso";
+    public static final String TELA_CADASTRO_PESO_USUARIO = "telacadastropesousuario";
     // Adicionado para trabalhar com a TelaCadastroAlimento
     public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
     // Adicionado para trabalhar com a TelaCadastroRefeicao
