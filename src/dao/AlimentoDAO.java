@@ -17,21 +17,21 @@ import util.JPAUtil;
  */
 public class AlimentoDAO implements IDAO<Alimento> {
     
-    private EntityManager em;
+    private final EntityManager manager;
     
     /**
      *
      */
     public AlimentoDAO() {
-        em = JPAUtil.getEntityManager();
+        manager = JPAUtil.getEntityManager();
     }
     
     @Override
     public Alimento save(Alimento alimento) {
-        em.getTransaction().begin();
-        Alimento merged = em.merge(alimento);
-        em.getTransaction().commit();
-        em.close();
+        manager.getTransaction().begin();
+        Alimento merged = manager.merge(alimento);
+        manager.getTransaction().commit();
+        manager.close();
         return merged;
     }
 
@@ -47,6 +47,8 @@ public class AlimentoDAO implements IDAO<Alimento> {
 
     @Override
     public List<Alimento> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Alimento> alimentos = manager.createNamedQuery("Alimento.findAll", Alimento.class).getResultList();
+        manager.close();
+        return alimentos;
     }
 }
