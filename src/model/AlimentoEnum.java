@@ -11,56 +11,17 @@ package model;
  */
 public enum AlimentoEnum {
 
-    /**
-     *
-     */
     FRUTA(0, "Fruta"),
-
-    /**
-     *
-     */
     VEGETAL(1, "Vegetal"),
-
-    /**
-     *
-     */
     CEREAL_REFINADO(2, "Cereal Refinado"),
-
-    /**
-     *
-     */
     CEREAL_INTEGRAL(3, "Cereal Integral"),
-
-    /**
-     *
-     */
     LACTEO(4, "Lácteo"),
-
-    /**
-     *
-     */
     OLEO_VEGETAL(5, "Óleo Vegetal"),
     LEGUMINOSA(6, "Leguminosa"),
     CARNE_VERMELHA(7, "Carne Vermelha"),
-
-    /**
-     *
-     */
     AVE(8, "Ave"),
-
-    /**
-     *
-     */
     PEIXE(9, "Peixe"),
-
-    /**
-     *
-     */
     FRUTO_DO_MAR(10, "Fruto do Mar"),
-
-    /**
-     *
-     */
     OVO(11, "Ovo"),
     DOCE(12, "Doce"),
     ACUCAR(13, "Açúcar"),
@@ -77,18 +38,10 @@ public enum AlimentoEnum {
         this.descricao = descricao;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getValor() {
         return valor;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getDescricao() {
         return descricao;
     }
