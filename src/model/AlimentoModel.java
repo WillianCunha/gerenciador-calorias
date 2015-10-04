@@ -115,6 +115,10 @@ public class AlimentoModel extends BindableModel {
     public Alimento getRegistroSelecionado() {
         return registroSelecionado;
     }
+    
+    public Alimento getRegistroEditado() {
+        return registroEditado;
+    }
 
     public void setRegistroEditado(Alimento registroEditado) {
         this.registroEditado = registroEditado;
@@ -135,5 +139,11 @@ public class AlimentoModel extends BindableModel {
         } else {
             this.backupRegistroCaracteristicaAlimento = backupRegistroCaracteristicaAlimento;
         }
+    }
+
+    public void addAlimento(Alimento alimento) {
+        this.alimentos.add(alimento);
+//        this.alimentos.sort(null);
+        firePropertyChange("alimentos", null, Collections.unmodifiableList(alimentos));
     }
 }

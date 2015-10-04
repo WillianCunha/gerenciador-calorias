@@ -50,8 +50,11 @@ public class AlimentoController {
      * @throws BusinessException
      */
     public void saveAlimento(Alimento alimento) throws BusinessException {
-        AlimentoDAO dao = new AlimentoDAO();
-        dao.save(alimento);
+        alimentoDAO = new AlimentoDAO();
+        alimento = alimentoDAO.save(alimento);
+        Alimento a = new Alimento(alimento.getId(), alimento.getNome(), alimento.getTipo());
+        model.removeAlimento(alimento);
+        model.addAlimento(a);
     }
 
     public AlimentoModel getModel() {

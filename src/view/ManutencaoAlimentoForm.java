@@ -8,16 +8,24 @@ package view;
 import control.AlimentoController;
 import entity.CaracteristicaAlimento;
 import entity.UnidadePadrao;
+import exception.BusinessException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.AlimentoEnum;
 import model.AlimentoModel;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Binding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.ELProperty;
 
 /**
  *
@@ -37,7 +45,23 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     }
 
     private void doBindings() {
-
+        BindingGroup bindingGroup = new BindingGroup();
+        
+        Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, model,
+                ELProperty.create("${registroEditado.id}"), idField, BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
+                ELProperty.create("${registroEditado.nome}"), nomeField, BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        
+        binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
+                ELProperty.create("${tipoCriteria}"), tipoCriteria, BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+        
+        bindingGroup.bind();
     }
 
     public void setController(AlimentoController controller) {
@@ -57,7 +81,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        tipoCriteria = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         addCaracteristicaButton = new javax.swing.JButton();
@@ -65,7 +89,8 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
-        nameField = new javax.swing.JTextField();
+        nomeField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -74,7 +99,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
         jLabel2.setText("Nome:");
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(AlimentoEnum.values()));
+        tipoCriteria.setModel(new DefaultComboBoxModel<>(AlimentoEnum.values()));
 
         masterTable.setModel(new CaracteristicaAlimentoTableModel());
         jScrollPane1.setViewportView(masterTable);
@@ -86,36 +111,49 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         cancelButton.setText("Fechar");
 
         saveButton.setText("Salvar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         idField.setEditable(false);
+
+        jLabel3.setText("Tipo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addCaracteristicaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeCaracteristicaButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameField)
-                            .addComponent(idField)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(addCaracteristicaButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(removeCaracteristicaButton))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeField)
+                                    .addComponent(idField)
+                                    .addComponent(tipoCriteria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -128,9 +166,11 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoCriteria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,18 +188,30 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        try {
+            controller.saveAlimento(model.getRegistroEditado());
+            JOptionPane.showMessageDialog(this, "Registro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } catch (BusinessException ex) {
+            Logger.getLogger(ManutencaoAlimentoForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCaracteristicaButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField idField;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable masterTable;
-    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField nomeField;
     private javax.swing.JButton removeCaracteristicaButton;
     private javax.swing.JButton saveButton;
+    private javax.swing.JComboBox tipoCriteria;
     // End of variables declaration//GEN-END:variables
 
     private class CaracteristicaAlimentoTableModel extends AbstractTableModel {
