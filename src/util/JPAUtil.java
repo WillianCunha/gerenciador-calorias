@@ -16,16 +16,19 @@ import javax.persistence.Persistence;
 public class JPAUtil {
 
     private static final String PERSISTENCE_UNIT_NAME = "SistemaGerenciadorCaloriasPU";
-    private static final EntityManagerFactory emf;
+    private static EntityManagerFactory emf;
 
-    static {
-        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-    }
-    
     private JPAUtil() {
 
     }
 
+    /**
+     *
+     */
+    public static void createEntityManagerFactory() {
+        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    }
+    
     /**
      * Obtendo um gerenciador de entidades
      * @return EntityManager

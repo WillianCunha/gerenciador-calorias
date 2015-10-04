@@ -13,6 +13,8 @@ public class TelaSobre extends javax.swing.JDialog {
 
     /**
      * Creates new form TelaSobre
+     * @param parent
+     * @param modal
      */
     public TelaSobre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -33,9 +36,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Peso.findById", query = "SELECT p FROM Peso p WHERE p.id = :id"),
     @NamedQuery(name = "Peso.findByData", query = "SELECT p FROM Peso p WHERE p.data = :data"),
     @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso"),
-    // Adicionado por mim
     @NamedQuery(name = "Peso.findByUsuarioByPesoAtual", query = "SELECT p FROM Peso p WHERE p.usuario = :usuario")})
 public class Peso implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,47 +56,94 @@ public class Peso implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuario;
 
+    /**
+     *
+     */
     public Peso() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Peso(Long id) {
         this.id = id;
     }
 
-    public Peso(Long id, Date data, float peso) {
+    /**
+     *
+     * @param id
+     * @param data
+     * @param peso
+     * @param usuario
+     */
+    public Peso(Long id, Date data, float peso, Usuario usuario) {
         this.id = id;
         this.data = data;
         this.peso = peso;
+        this.usuario = usuario;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getData() {
         return data;
     }
 
+    /**
+     *
+     * @param data
+     */
     public void setData(Date data) {
         this.data = data;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPeso() {
         return peso;
     }
 
+    /**
+     *
+     * @param peso
+     */
     public void setPeso(float peso) {
         this.peso = peso;
     }
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -122,5 +172,5 @@ public class Peso implements Serializable {
     public String toString() {
         return "entity.Peso[ id=" + id + " ]";
     }
-    
+
 }

@@ -5,19 +5,39 @@
  */
 package view;
 
+import java.awt.event.KeyEvent;
 import session.SessionManager;
+import util.JPAUtil;
 
 /**
  *
  * @author visitante
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class PrincipalView extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public PrincipalView() {        
+        init();
         initComponents();        
+        doLogin();
+    }
+    
+    private void init() {
+        new Thread(() -> {
+        JPAUtil.createEntityManagerFactory();
+        }).start();
+    }
+
+    private void doLogin() {
+        if (SessionManager.getUsuarioLogado() == null) {
+            new Thread(() -> {
+                LoginView login = new LoginView(this, true);
+                login.setLocationRelativeTo(null);
+                login.setVisible(true);
+            }).start();
+        };
     }
 
     /**
@@ -31,29 +51,63 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
+        cadastroMenu = new javax.swing.JMenu();
+        cadastroAlimentoMenuItem = new javax.swing.JMenuItem();
+        cadastroRelatorioMenuItem = new javax.swing.JMenuItem();
+        cadastroRefeiçãoMenuItem = new javax.swing.JMenuItem();
+        manutencaoPesoUsuarioMenuItem = new javax.swing.JMenuItem();
+        manutencaoUsuarioMenuItem = new javax.swing.JMenuItem();
         consultaMenu = new javax.swing.JMenu();
         consultaAlimentoMenuItem = new javax.swing.JMenuItem();
         consultaRelatorioMenuItem = new javax.swing.JMenuItem();
         consultaDiarioMenuItem = new javax.swing.JMenuItem();
         consultaPesoMenuItem = new javax.swing.JMenuItem();
-        cadastroMenu = new javax.swing.JMenu();
-        cadastroAlimentoMenuItem = new javax.swing.JMenuItem();
-        cadastroRelatorioMenuItem = new javax.swing.JMenuItem();
-        cadastroRefeiçãoMenuItem = new javax.swing.JMenuItem();
-        cadastroPesoMenuItem = new javax.swing.JMenuItem();
         ajudaMenu = new javax.swing.JMenu();
         sobreMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Calorias");
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+
+        cadastroMenu.setMnemonic(KeyEvent.VK_M);
+        cadastroMenu.setText("Manutenção");
+
+        cadastroAlimentoMenuItem.setMnemonic('p');
+        cadastroAlimentoMenuItem.setText("Alimento");
+        cadastroAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroAlimentoMenuItemActionPerformed(evt);
             }
         });
+        cadastroMenu.add(cadastroAlimentoMenuItem);
 
-        consultaMenu.setMnemonic('f');
+        cadastroRelatorioMenuItem.setMnemonic('t');
+        cadastroRelatorioMenuItem.setText("Relatório");
+        cadastroMenu.add(cadastroRelatorioMenuItem);
+
+        cadastroRefeiçãoMenuItem.setMnemonic('d');
+        cadastroRefeiçãoMenuItem.setText("Refeição");
+        cadastroRefeiçãoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroRefeiçãoMenuItemActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(cadastroRefeiçãoMenuItem);
+
+        manutencaoPesoUsuarioMenuItem.setMnemonic('y');
+        manutencaoPesoUsuarioMenuItem.setText("Peso Usuário");
+        manutencaoPesoUsuarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manutencaoPesoUsuarioMenuItemActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(manutencaoPesoUsuarioMenuItem);
+
+        manutencaoUsuarioMenuItem.setText("Usuário");
+        cadastroMenu.add(manutencaoUsuarioMenuItem);
+
+        menuBar.add(cadastroMenu);
+
+        consultaMenu.setMnemonic(KeyEvent.VK_C);
         consultaMenu.setText("Consulta");
 
         consultaAlimentoMenuItem.setMnemonic('s');
@@ -93,42 +147,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(consultaMenu);
 
-        cadastroMenu.setMnemonic('e');
-        cadastroMenu.setText("Cadastro");
-
-        cadastroAlimentoMenuItem.setMnemonic('p');
-        cadastroAlimentoMenuItem.setText("Alimento");
-        cadastroAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroAlimentoMenuItemActionPerformed(evt);
-            }
-        });
-        cadastroMenu.add(cadastroAlimentoMenuItem);
-
-        cadastroRelatorioMenuItem.setMnemonic('t');
-        cadastroRelatorioMenuItem.setText("Relatório");
-        cadastroMenu.add(cadastroRelatorioMenuItem);
-
-        cadastroRefeiçãoMenuItem.setMnemonic('d');
-        cadastroRefeiçãoMenuItem.setText("Refeição");
-        cadastroRefeiçãoMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroRefeiçãoMenuItemActionPerformed(evt);
-            }
-        });
-        cadastroMenu.add(cadastroRefeiçãoMenuItem);
-
-        cadastroPesoMenuItem.setMnemonic('y');
-        cadastroPesoMenuItem.setText("Peso");
-        cadastroPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroPesoMenuItemActionPerformed(evt);
-            }
-        });
-        cadastroMenu.add(cadastroPesoMenuItem);
-
-        menuBar.add(cadastroMenu);
-
+        ajudaMenu.setMnemonic(KeyEvent.VK_A);
         ajudaMenu.setText("Ajuda");
 
         sobreMenuItem.setText("Sobre");
@@ -148,42 +167,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadastroPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroPesoMenuItemActionPerformed
-        TelaCadastroPeso frame;
+    private void manutencaoPesoUsuarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoPesoUsuarioMenuItemActionPerformed
+        ManutencaoPesoUsuarioView view;
 
-        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_PESO)) {
-            frame = (TelaCadastroPeso) DesktopManager.get(DesktopManager.TELA_CADASTRO_PESO);
-            desktopPane.setSelectedFrame(frame);
-            frame.pack();
+        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_PESO_USUARIO)) {
+            view = (ManutencaoPesoUsuarioView) DesktopManager.get(DesktopManager.TELA_CADASTRO_PESO_USUARIO);
+            desktopPane.setSelectedFrame(view);
+            view.pack();
         } else {
-            frame = new TelaCadastroPeso();
-            desktopPane.add(frame);
-            DesktopManager.add(DesktopManager.TELA_CADASTRO_PESO, frame);
+            view = new ManutencaoPesoUsuarioView();
+            desktopPane.add(view);
+            DesktopManager.add(DesktopManager.TELA_CADASTRO_PESO_USUARIO, view);
         }
-        frame.show();
-    }//GEN-LAST:event_cadastroPesoMenuItemActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if (SessionManager.getUsuarioLogado() == null) {
-            TelaLogin login = new TelaLogin(this, true);
-            login.setLocationRelativeTo(null);
-            login.setVisible(true);
-        }
-    }//GEN-LAST:event_formWindowActivated
+        view.show();
+    }//GEN-LAST:event_manutencaoPesoUsuarioMenuItemActionPerformed
 
     private void cadastroAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroAlimentoMenuItemActionPerformed
         TelaCadastroAlimento frame;
@@ -243,14 +254,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaDiarioMenuItemActionPerformed
 
     private void consultaPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPesoMenuItemActionPerformed
-        TelaConsultaPeso frame;
+        ManutencaoPesoUsuarioView frame;
 
         if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_PESO)) {
-            frame = (TelaConsultaPeso) DesktopManager.get(DesktopManager.TELA_CONSULTA_PESO);
+            frame = (ManutencaoPesoUsuarioView) DesktopManager.get(DesktopManager.TELA_CONSULTA_PESO);
             desktopPane.setSelectedFrame(frame);
             frame.pack();
         } else {
-            frame = new TelaConsultaPeso();
+            frame = new ManutencaoPesoUsuarioView();
             desktopPane.add(frame);
             DesktopManager.add(DesktopManager.TELA_CONSULTA_PESO, frame);
         }
@@ -274,19 +285,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            TelaPrincipal principal = new TelaPrincipal();
+            PrincipalView principal = new PrincipalView();
             principal.setLocationRelativeTo(null);
             principal.setVisible(true);
         });
@@ -296,7 +308,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu ajudaMenu;
     private javax.swing.JMenuItem cadastroAlimentoMenuItem;
     private javax.swing.JMenu cadastroMenu;
-    private javax.swing.JMenuItem cadastroPesoMenuItem;
     private javax.swing.JMenuItem cadastroRefeiçãoMenuItem;
     private javax.swing.JMenuItem cadastroRelatorioMenuItem;
     private javax.swing.JMenuItem consultaAlimentoMenuItem;
@@ -305,6 +316,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultaPesoMenuItem;
     private javax.swing.JMenuItem consultaRelatorioMenuItem;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenuItem manutencaoPesoUsuarioMenuItem;
+    private javax.swing.JMenuItem manutencaoUsuarioMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem sobreMenuItem;
     // End of variables declaration//GEN-END:variables

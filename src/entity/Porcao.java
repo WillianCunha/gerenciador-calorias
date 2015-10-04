@@ -49,49 +49,96 @@ public class Porcao implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UnidadePadrao unidadePadrao;
 
+    /**
+     *
+     */
     public Porcao() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Porcao(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getQuantidade() {
         return quantidade;
     }
 
+    /**
+     *
+     * @param quantidade
+     */
     public void setQuantidade(Float quantidade) {
         this.quantidade = quantidade;
     }
 
+    /**
+     *
+     * @return
+     */
     public Alimento getAlimento() {
         return alimento;
     }
 
+    /**
+     *
+     * @param alimento
+     */
     public void setAlimento(Alimento alimento) {
         this.alimento = alimento;
     }
 
+    /**
+     *
+     * @return
+     */
     public Refeicao getRefeicao() {
         return refeicao;
     }
 
+    /**
+     *
+     * @param refeicao
+     */
     public void setRefeicao(Refeicao refeicao) {
         this.refeicao = refeicao;
     }
 
+    /**
+     *
+     * @return
+     */
     public UnidadePadrao getUnidadePadrao() {
         return unidadePadrao;
     }
 
+    /**
+     *
+     * @param unidadePadrao
+     */
     public void setUnidadePadrao(UnidadePadrao unidadePadrao) {
         this.unidadePadrao = unidadePadrao;
     }

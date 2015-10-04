@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class DesktopManager {
 
-    public static final String TELA_CADASTRO_PESO = "telacadastropeso";
+    public static final String TELA_CADASTRO_PESO_USUARIO = "telacadastropesousuario";
     // Adicionado para trabalhar com a TelaCadastroAlimento
     public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
     // Adicionado para trabalhar com a TelaCadastroRefeicao
@@ -24,6 +24,8 @@ public class DesktopManager {
     public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
     // Adicionado para trabalhar com a TelaConsultaAlimento
     public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
+    // Adicionado para trabalhar com a TelaCadastroAtributo
+    public static final String TELA_CADASTRO_ATRIBUTO = "telacadastroatributo";
 
     private static Map<String, Component> windows;
 

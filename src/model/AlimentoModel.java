@@ -14,14 +14,25 @@ import entity.Alimento;
 public class AlimentoModel extends BindableModel {
     private Alimento alimento;
     
+    /**
+     *
+     */
     public AlimentoModel() {
         alimento = new Alimento();
     }
     
+    /**
+     *
+     * @return
+     */
     public Alimento getAlimento() {
         return alimento;
     }
     
+    /**
+     *
+     * @param alimento
+     */
     public void setAlimento(Alimento alimento) {
         Alimento oldValue = this.alimento;
         this.alimento = alimento;

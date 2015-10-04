@@ -117,6 +117,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="addAtributoButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Atributo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAtributoButtonActionPerformed"/>
+      </Events>
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -128,10 +136,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
-                <Column editable="true" title="Valor" type="java.lang.Object"/>
-                <Column editable="true" title="Unidade" type="java.lang.Object"/>
-                <Column editable="true" title="Por&#xe7;&#xe3;o" type="java.lang.Object"/>
+                <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
+                <Column editable="true" title="Valor" type="java.lang.Float"/>
+                <Column editable="true" title="Unidade" type="java.lang.String"/>
+                <Column editable="true" title="Por&#xe7;&#xe3;o" type="java.lang.Float"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -165,10 +173,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="addAtributoButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Adicionar Atributo"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

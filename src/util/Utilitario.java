@@ -19,11 +19,23 @@ import java.util.GregorianCalendar;
  */
 public class Utilitario {
 
+    /**
+     *
+     * @param altura
+     * @param peso
+     * @param idade
+     * @return
+     */
     public float calcularIMC(float altura, float peso, int idade) {
         float imc = peso / (altura * altura);
         return imc;
     }
 
+    /**
+     *
+     * @param dataNascimento
+     * @return
+     */
     public int calcularIdade(Date dataNascimento) {
         int idade = 0;
 //        LocalDate data;
@@ -40,6 +52,14 @@ public class Utilitario {
 
     }
 
+    /**
+     *
+     * @param peso
+     * @param altura
+     * @param idade
+     * @param genero
+     * @return
+     */
     public float calcularNivelMetabolicoBasal(float peso, float altura, int idade, char genero) {
         float nivelMetabolicoBasal = 0;
         switch (genero) {

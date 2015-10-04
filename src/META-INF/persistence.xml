@@ -10,6 +10,7 @@
     <class>entity.Peso</class>
     <class>entity.Diario</class>
     <class>entity.Alimento</class>
+    <class>entity.Usuario</class>
     <class>entity.CaracteristicaAlimento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gerenciadorcalorias?zeroDateTimeBehavior=convertToNull"/>
@@ -20,7 +21,7 @@
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <!-- Pool de conexões -->
       <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
       <property name="hibernate.c3p0.min_size" value="5"/>

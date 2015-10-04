@@ -19,10 +19,18 @@ public class SessionManager {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public static Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
     
+    /**
+     *
+     * @param usuario
+     */
     public static void setUsuarioLogado(Usuario usuario) {
         usuarioLogado = usuario;
     }
