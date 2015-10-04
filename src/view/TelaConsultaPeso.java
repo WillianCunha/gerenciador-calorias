@@ -67,7 +67,8 @@ public class TelaConsultaPeso extends javax.swing.JInternalFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         
-        Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, masterTable, ELProperty.create("${selectedElement.data}"), dataField, BeanProperty.create("text"));
+        // Alterei o "text" para "date" mas não funciona
+        Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, masterTable, ELProperty.create("${selectedElement.data}"), dataField, BeanProperty.create("date"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, masterTable, ELProperty.create("${selectedElement != null}"), dataField, BeanProperty.create("enabled"));
@@ -135,14 +136,7 @@ public class TelaConsultaPeso extends javax.swing.JInternalFrame {
         atributoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data", "Peso" }));
         atributoComboBox.setToolTipText("Tipo da pesquisa a ser feita");
 
-        masterTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
+        masterTable.setModel(new PesoTableModel());
         jScrollPane1.setViewportView(masterTable);
 
         newButton.setText("Novo");
