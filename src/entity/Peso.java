@@ -5,8 +5,6 @@
  */
 package entity;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -23,7 +21,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
@@ -36,11 +33,9 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Peso.findById", query = "SELECT p FROM Peso p WHERE p.id = :id"),
     @NamedQuery(name = "Peso.findByData", query = "SELECT p FROM Peso p WHERE p.data = :data"),
     @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso"),
-    // Adicionado por mim
     @NamedQuery(name = "Peso.findByUsuarioByPesoAtual", query = "SELECT p FROM Peso p WHERE p.usuario = :usuario")})
 public class Peso implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,7 +79,7 @@ public class Peso implements Serializable {
         this.data = data;
         this.peso = peso;
         this.usuario = usuario;
-    }    
+    }
 
     /**
      *
@@ -99,9 +94,7 @@ public class Peso implements Serializable {
      * @param id
      */
     public void setId(Long id) {
-        Long oldId = this.id;
         this.id = id;
-        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     /**
@@ -117,9 +110,7 @@ public class Peso implements Serializable {
      * @param data
      */
     public void setData(Date data) {
-        Date oldData = this.data;
         this.data = data;
-        changeSupport.firePropertyChange("data", oldData, data);
     }
 
     /**
@@ -135,9 +126,7 @@ public class Peso implements Serializable {
      * @param peso
      */
     public void setPeso(float peso) {
-        float oldPeso = this.peso;
         this.peso = peso;
-        changeSupport.firePropertyChange("peso", oldPeso, peso);
     }
 
     /**
@@ -153,9 +142,7 @@ public class Peso implements Serializable {
      * @param usuario
      */
     public void setUsuario(Usuario usuario) {
-        Usuario oldUsuario = this.usuario;
         this.usuario = usuario;
-        changeSupport.firePropertyChange("usuario", oldUsuario, usuario);
     }
 
     @Override
@@ -183,20 +170,4 @@ public class Peso implements Serializable {
         return "entity.Peso[ id=" + id + " ]";
     }
 
-    /**
-     *
-     * @param listener
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    /**
-     *
-     * @param listener
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
-    }
-    
 }

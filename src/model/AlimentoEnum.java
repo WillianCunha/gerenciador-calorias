@@ -40,15 +40,7 @@ public enum AlimentoEnum {
      *
      */
     OLEO_VEGETAL(5, "Óleo Vegetal"),
-
-    /**
-     *
-     */
-    LEGUMINOSO(6, "Leguminoso"),
-
-    /**
-     *
-     */
+    LEGUMINOSA(6, "Leguminosa"),
     CARNE_VERMELHA(7, "Carne Vermelha"),
 
     /**
@@ -70,11 +62,12 @@ public enum AlimentoEnum {
      *
      */
     OVO(11, "Ovo"),
-
-    /**
-     *
-     */
-    DOCE(12, "Doce");
+    DOCE(12, "Doce"),
+    ACUCAR(13, "Açúcar"),
+    SALGADO(14, "Salgado"),
+    BEBIDA(15, "Bebida"),
+    CASTANHA(16, "Castanha"),
+    SEMENTE(17, "Semente");
 
     private final int valor;
     private final String descricao;

@@ -24,25 +24,23 @@ public class DesktopManager {
     /**
      *
      */
-        public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
+    public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
     // Adicionado para trabalhar com a TelaCadastroRefeicao
 
     /**
      *
      */
-        public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
+    public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
     // Adicionado para trabalhar com a TelaConsultaPeso
 
     /**
      *
      */
-        public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
+    public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
     // Adicionado para trabalhar com a TelaConsultaAlimento
-
-    /**
-     *
-     */
-        public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
+    public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
+    // Adicionado para trabalhar com a TelaCadastroAtributo
+    public static final String TELA_CADASTRO_ATRIBUTO = "telacadastroatributo";
 
     private static Map<String, Component> windows;
 
