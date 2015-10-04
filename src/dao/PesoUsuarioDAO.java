@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.Peso;
 import entity.Usuario;
 import exception.BusinessException;
 import java.util.List;
@@ -17,14 +18,14 @@ import util.JPAUtil;
  *
  * @author winston.sonnesen
  */
-public class UsuarioDAO implements IDAO<Usuario> {
+public class PesoUsuarioDAO implements IDAO<Peso> {
 
     private final EntityManager manager;
 
     /**
      * Construtor da classe
      */
-    public UsuarioDAO() {
+    public PesoUsuarioDAO() {
         manager = JPAUtil.getEntityManager();
     }
 
@@ -33,42 +34,42 @@ public class UsuarioDAO implements IDAO<Usuario> {
      * @return
      */
     @Override
-    public List<Usuario> findAll() {
-        List<Usuario> usuarios = manager.createNamedQuery("Usuario.findAll", Usuario.class).getResultList();
+    public List<Peso> findAll() {
+        List<Peso> pesos = manager.createNamedQuery("Peso.findAll", Peso.class).getResultList();
         manager.close();
-        return usuarios;
+        return pesos;
     }
 
     /**
      *
-     * @param usuario
+     * @param peso
      * @throws BusinessException
      */
     @Override
-    public Usuario save(Usuario usuario) throws BusinessException {
+    public Peso save(Peso peso) throws BusinessException {
         try {
             manager.getTransaction().begin();
-            if (!manager.contains(usuario)) {
-                usuario = manager.merge(usuario);
+            if (!manager.contains(peso)) {
+                peso = manager.merge(peso);
             }
-            manager.persist(usuario);
+            manager.persist(peso);
             manager.getTransaction().commit();
         } catch (RollbackException e) {
-            throw new BusinessException("Erro ao salvar registro: " + usuario, e);
+            throw new BusinessException("Erro ao salvar registro: " + peso, e);
         } finally {
             manager.close();
         }
-        return usuario;
+        return peso;
     }
 
     @Override
-    public void remove(Usuario usuario) throws BusinessException {
+    public void remove(Peso peso) throws BusinessException {
         try {
             manager.getTransaction().begin();
-            manager.remove(manager.merge(usuario));
+            manager.remove(manager.merge(peso));
             manager.getTransaction().commit();
         } catch (RollbackException e) {
-            throw new BusinessException("Erro ao remover registro: " + usuario, e);
+            throw new BusinessException("Erro ao remover registro: " + peso, e);
         } finally {
             manager.close();
         }
@@ -80,26 +81,22 @@ public class UsuarioDAO implements IDAO<Usuario> {
      * @return
      */
     @Override
-    public Usuario findById(Long id) {
-        Usuario usuario = manager.find(Usuario.class, id);
+    public Peso findById(Long id) {
+        Peso peso = manager.find(Peso.class, id);
         manager.close();
-        return usuario;
+        return peso;
     }
 
     /**
-     *
-     * @param login
-     * @param senha
-     * @return
+     * @param usuario
+     * @return 
      */
-    public Usuario findByLoginSenha(String login, String senha) {
-        TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.findByLoginSenha", Usuario.class)
-                .setParameter("login", login)
-                .setParameter("senha", senha);
-
-        Usuario u = query.getSingleResult();
+    public List<Peso> findByUsuario(Usuario usuario) {
+        TypedQuery<Peso> query = manager.createQuery("from Peso p inner join fetch p.usuario where p.usuario = :usuario", Peso.class)
+                .setParameter("usuario", usuario);
+        List<Peso> result = query.getResultList();
         manager.close();
-        return u;
+        return result;
     }
 
 }

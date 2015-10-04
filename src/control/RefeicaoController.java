@@ -18,10 +18,19 @@ public class RefeicaoController {
     
     private final RefeicaoModel model;
     
+    /**
+     *
+     * @param model
+     */
     public RefeicaoController(RefeicaoModel model) {
         this.model = model;
     }
     
+    /**
+     *
+     * @param refeicao
+     * @throws BusinessException
+     */
     public void saveRefeicao(Refeicao refeicao) throws BusinessException {
         RefeicaoDAO dao = new RefeicaoDAO();
         dao.save(refeicao);

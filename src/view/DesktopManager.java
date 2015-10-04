@@ -15,15 +15,34 @@ import java.util.Map;
  */
 public class DesktopManager {
 
-    public static final String TELA_CADASTRO_PESO = "telacadastropeso";
+    /**
+     *
+     */
+    public static final String TELA_CADASTRO_PESO_USUARIO = "telacadastropesousuario";
     // Adicionado para trabalhar com a TelaCadastroAlimento
-    public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
+
+    /**
+     *
+     */
+        public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
     // Adicionado para trabalhar com a TelaCadastroRefeicao
-    public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
+
+    /**
+     *
+     */
+        public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
     // Adicionado para trabalhar com a TelaConsultaPeso
-    public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
+
+    /**
+     *
+     */
+        public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
     // Adicionado para trabalhar com a TelaConsultaAlimento
-    public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
+
+    /**
+     *
+     */
+        public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
 
     private static Map<String, Component> windows;
 
@@ -31,6 +50,11 @@ public class DesktopManager {
         windows = new HashMap();
     }
 
+    /**
+     *
+     * @param name
+     * @param window
+     */
     public static void add(String name, Component window) {
         try {
             windows.put(name, window);
@@ -39,14 +63,28 @@ public class DesktopManager {
         }
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public static Component get(String name) {
         return windows.get(name);
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public static boolean contains(String name) {
         return windows.containsKey(name);
     }
 
+    /**
+     *
+     * @param name
+     */
     public static void remove(String name) {
         windows.remove(name);
     }

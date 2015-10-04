@@ -50,54 +50,106 @@ public class CaracteristicaAlimento implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UnidadePadrao unidadePadrao;
 
+    /**
+     *
+     */
     public CaracteristicaAlimento() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public CaracteristicaAlimento(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param descricao
+     */
     public CaracteristicaAlimento(Long id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getValor() {
         return valor;
     }
 
+    /**
+     *
+     * @param valor
+     */
     public void setValor(Float valor) {
         this.valor = valor;
     }
 
+    /**
+     *
+     * @return
+     */
     public Alimento getAlimento() {
         return alimento;
     }
 
+    /**
+     *
+     * @param alimento
+     */
     public void setAlimento(Alimento alimento) {
         this.alimento = alimento;
     }
 
+    /**
+     *
+     * @return
+     */
     public UnidadePadrao getUnidadePadrao() {
         return unidadePadrao;
     }
 
+    /**
+     *
+     * @param unidadePadrao
+     */
     public void setUnidadePadrao(UnidadePadrao unidadePadrao) {
         this.unidadePadrao = unidadePadrao;
     }

@@ -11,11 +11,34 @@ package model;
  */
 public enum NivelAtividadeFisicaEnum {
 
+    /**
+     *
+     */
     BASAL(0, "Basal"),
+
+    /**
+     *
+     */
     SEDENTARIO(1, "Sedentário"),
+
+    /**
+     *
+     */
     ATIVIDADE_LEVE(2, "Atividade Leve"),
+
+    /**
+     *
+     */
     ATIVIDADE_MODERADA(3, "Atividade Moderada"),
+
+    /**
+     *
+     */
     ATIVIDADE_INTENSA(4, "Atividade Intesa"),
+
+    /**
+     *
+     */
     ATIVIDADE_MUITO_INTENSA(5, "Atividade Muito Intensa");
 
     private final int valor;
@@ -26,10 +49,18 @@ public enum NivelAtividadeFisicaEnum {
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getValor() {
         return valor;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }

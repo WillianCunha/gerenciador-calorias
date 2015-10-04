@@ -49,55 +49,108 @@ public class Alimento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alimento", fetch = FetchType.LAZY)
     private List<Porcao> porcaoList;
 
+    /**
+     *
+     */
     public Alimento() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Alimento(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param nome
+     * @param tipo
+     */
     public Alimento(Long id, String nome, String tipo) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     *
+     * @param tipo
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<CaracteristicaAlimento> getCaracteristicaAlimentoList() {
         return caracteristicaAlimentoList;
     }
 
+    /**
+     *
+     * @param caracteristicaAlimentoList
+     */
     public void setCaracteristicaAlimentoList(List<CaracteristicaAlimento> caracteristicaAlimentoList) {
         this.caracteristicaAlimentoList = caracteristicaAlimentoList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Porcao> getPorcaoList() {
         return porcaoList;
     }
 
+    /**
+     *
+     * @param porcaoList
+     */
     public void setPorcaoList(List<Porcao> porcaoList) {
         this.porcaoList = porcaoList;
     }

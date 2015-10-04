@@ -11,6 +11,9 @@ package exception;
  */
 public class BusinessException extends Exception {
 
+    /**
+     *
+     */
     public static final String USUARIO_NAO_CADASTRADO = "Usuário ou senha inválidos";
     
     /**
