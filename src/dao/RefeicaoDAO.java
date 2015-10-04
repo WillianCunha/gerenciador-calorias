@@ -19,6 +19,9 @@ public class RefeicaoDAO implements IDAO<Refeicao> {
 
     private EntityManager em;
     
+    /**
+     *
+     */
     public RefeicaoDAO() {
         em = JPAUtil.getEntityManager();
     }

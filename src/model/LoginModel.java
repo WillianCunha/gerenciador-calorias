@@ -15,14 +15,25 @@ public class LoginModel extends BindableModel {
 
     private Usuario usuario;
 
+    /**
+     *
+     */
     public LoginModel() {
         usuario = new Usuario();
     }
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(Usuario usuario) {
         Usuario oldValue = this.usuario;
         this.usuario = usuario;

@@ -42,46 +42,90 @@ public class UnidadePadrao implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "unidadePadrao", fetch = FetchType.LAZY)
     private List<Porcao> porcaoList;
 
+    /**
+     *
+     */
     public UnidadePadrao() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public UnidadePadrao(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param descricao
+     */
     public UnidadePadrao(Long id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<CaracteristicaAlimento> getCaracteristicaAlimentoList() {
         return caracteristicaAlimentoList;
     }
 
+    /**
+     *
+     * @param caracteristicaAlimentoList
+     */
     public void setCaracteristicaAlimentoList(List<CaracteristicaAlimento> caracteristicaAlimentoList) {
         this.caracteristicaAlimentoList = caracteristicaAlimentoList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Porcao> getPorcaoList() {
         return porcaoList;
     }
 
+    /**
+     *
+     * @param porcaoList
+     */
     public void setPorcaoList(List<Porcao> porcaoList) {
         this.porcaoList = porcaoList;
     }

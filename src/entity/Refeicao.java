@@ -48,46 +48,90 @@ public class Refeicao implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "refeicao", fetch = FetchType.LAZY)
     private List<Porcao> porcaoList;
 
+    /**
+     *
+     */
     public Refeicao() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Refeicao(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param nome
+     */
     public Refeicao(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public Registro getRegistro() {
         return registro;
     }
 
+    /**
+     *
+     * @param registro
+     */
     public void setRegistro(Registro registro) {
         this.registro = registro;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Porcao> getPorcaoList() {
         return porcaoList;
     }
 
+    /**
+     *
+     * @param porcaoList
+     */
     public void setPorcaoList(List<Porcao> porcaoList) {
         this.porcaoList = porcaoList;
     }

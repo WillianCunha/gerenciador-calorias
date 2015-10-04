@@ -19,10 +19,19 @@ public class LoginController {
     
     private final LoginModel model;
     
+    /**
+     *
+     * @param model
+     */
     public LoginController(LoginModel model) {
         this.model = model;
     }
     
+    /**
+     *
+     * @param usuario
+     * @throws BusinessException
+     */
     public void doLogin(Usuario usuario) throws BusinessException {
         UsuarioDAO dao = new UsuarioDAO();
         Usuario usuarioLogado = dao.findByLoginSenha(usuario.getLogin(), usuario.getSenha());

@@ -18,10 +18,19 @@ public class AlimentoController {
     
     private final AlimentoModel model;
     
+    /**
+     *
+     * @param model
+     */
     public AlimentoController(AlimentoModel model) {
         this.model = model;
     }
     
+    /**
+     *
+     * @param alimento
+     * @throws BusinessException
+     */
     public void saveAlimento(Alimento alimento) throws BusinessException {
         AlimentoDAO dao = new AlimentoDAO();
         dao.save(alimento);

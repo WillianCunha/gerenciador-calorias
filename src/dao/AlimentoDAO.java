@@ -19,6 +19,9 @@ public class AlimentoDAO implements IDAO<Alimento> {
     
     private EntityManager em;
     
+    /**
+     *
+     */
     public AlimentoDAO() {
         em = JPAUtil.getEntityManager();
     }
