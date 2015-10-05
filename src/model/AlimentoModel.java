@@ -158,6 +158,10 @@ public class AlimentoModel extends BindableModel {
         this.filterValue = filterValue;
         firePropertyChange("filterValue", null, filterValue);
     }
+    
+    public Alimento getRegistroEditado() {
+        return registroEditado;
+    }
 
     /**
      *
@@ -191,5 +195,11 @@ public class AlimentoModel extends BindableModel {
     public void setBackupAlimentos(List<Alimento> backupAlimentos) {
         this.backupAlimentos = new ArrayList();
         this.backupAlimentos.addAll(backupAlimentos);
+    }
+
+    public void addAlimento(Alimento alimento) {
+        this.alimentos.add(alimento);
+//        this.alimentos.sort(null);
+        firePropertyChange("alimentos", null, Collections.unmodifiableList(alimentos));
     }
 }
