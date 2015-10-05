@@ -24,7 +24,7 @@ public class UsuarioModel extends BindableModel {
     private List<Usuario> usuarios;
     private List<Usuario> backupUsuarios;
     private Boolean isEnabled;
-    
+
     /**
      * Construtor da classe
      */
@@ -72,9 +72,11 @@ public class UsuarioModel extends BindableModel {
      * @param usuario
      */
     public void removeUsuario(Usuario usuario) {
-        this.usuarios.remove(usuario);
-        this.usuarios.sort(new UsuarioComparator());
-        firePropertyChange("usuarios", null, Collections.unmodifiableList(usuarios));
+        if (usuarios != null) {
+            usuarios.remove(usuario);
+            usuarios.sort(new UsuarioComparator());
+            firePropertyChange("usuarios", null, Collections.unmodifiableList(usuarios));
+        }
     }
 
     /**
@@ -82,9 +84,11 @@ public class UsuarioModel extends BindableModel {
      * @param usuario
      */
     public void addUsuario(Usuario usuario) {
-        this.usuarios.add(usuario);
-        this.usuarios.sort(new UsuarioComparator());
-        firePropertyChange("usuarios", null, Collections.unmodifiableList(usuarios));
+        if (usuarios != null) {
+            usuarios.add(usuario);
+            usuarios.sort(new UsuarioComparator());
+            firePropertyChange("usuarios", null, Collections.unmodifiableList(usuarios));
+        }
     }
 
     /**

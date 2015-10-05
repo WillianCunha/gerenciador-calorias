@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Adicionar Conta Usu&#xe1;rio"/>
@@ -28,22 +28,20 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="285" max="32767" attributes="0"/>
                       <Component id="saveButton" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cancelButton" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel4" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="confirmacaoSenhaField" pref="425" max="32767" attributes="0"/>
                           <Component id="nomeField" max="32767" attributes="0"/>
                           <Component id="loginField" max="32767" attributes="0"/>
                           <Component id="senhaField" alignment="0" max="32767" attributes="0"/>
@@ -72,12 +70,7 @@
                   <Component id="senhaField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmacaoSenhaField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -127,14 +120,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="senhaField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Confirma&#xe7;&#xe3;o senha:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="confirmacaoSenhaField">
     </Component>
   </SubComponents>
 </Form>
