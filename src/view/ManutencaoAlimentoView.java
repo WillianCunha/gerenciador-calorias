@@ -8,23 +8,17 @@ package view;
 import control.AlimentoController;
 import entity.Alimento;
 import exception.BusinessException;
-import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import model.AlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -315,7 +309,7 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
     private class AlimentoTableModel extends AbstractTableModel {
 
         private List<Alimento> alimentos;
-        private final String[] columnNames = {"ID", "Nome", "Tipo", "Porção", "Calorias"};
+        private final String[] columnNames = {"ID", "Nome", "Tipo"};
         private final int COLUMN_COUNT = columnNames.length;
 
         public AlimentoTableModel() {
@@ -352,10 +346,6 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
                     return alimento.getNome();
                 case 2:
                     return alimento.getTipo();
-                case 3:
-                    return alimento.getPorcaoList().get(0);
-                case 4:
-//                    return alimento.getCaracteristicaAlimentoList().get(0).
                 default:
                     return "";
             }
@@ -379,8 +369,6 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
                 case 2:
                     alimento.setTipo(aValue.toString());
                     break;
-//                case 3:
-//                    alimento.setPorcaoList(null);                    
             }
             fireTableDataChanged();
         }

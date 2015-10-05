@@ -182,7 +182,10 @@ public class LoginView extends javax.swing.JDialog {
 
     private void newAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountButtonActionPerformed
         // TODO add your handling code here:
-        
+        new Thread(() -> {
+            CadastroUsuarioView view = new CadastroUsuarioView(null, true);
+            view.setVisible(true);
+        }).start();
     }//GEN-LAST:event_newAccountButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

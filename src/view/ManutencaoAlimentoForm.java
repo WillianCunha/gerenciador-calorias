@@ -74,7 +74,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
         jLabel2.setText("Nome:");
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(AlimentoEnum.values()));
+        jComboBox1.setModel(new DefaultComboBoxModel(AlimentoEnum.values()));
 
         masterTable.setModel(new CaracteristicaAlimentoTableModel());
         jScrollPane1.setViewportView(masterTable);
@@ -94,29 +94,29 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addCaracteristicaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeCaracteristicaButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameField)
-                            .addComponent(idField)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelButton)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(saveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(addCaracteristicaButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(removeCaracteristicaButton))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nameField)
+                                    .addComponent(idField)
+                                    .addComponent(jComboBox1, 0, 340, Short.MAX_VALUE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +137,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addCaracteristicaButton)
                     .addComponent(removeCaracteristicaButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
@@ -247,9 +247,9 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             }
             int row = masterTable.getSelectedRow();
             if (row >= 0) {
-                CaracteristicaAlimento c = model.getCaracteristicaAlimentos().get(row);
-                model.setBackupRegistroCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
-                model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
+                //CaracteristicaAlimento c = model.getCaracteristicaAlimentos().get(row);
+                //model.setBackupRegistroCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
+                //model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
             }
         }
         
