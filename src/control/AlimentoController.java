@@ -36,7 +36,7 @@ public class AlimentoController {
      * 
      */
     public void carregarAlimentos() {
-        model.setFilterCriteria("");
+        model.setFilterCriteria("Nome");
         model.setFilterValue("");
         alimentoDAO = new AlimentoDAO();
         List<Alimento> alimentos = alimentoDAO.findAll();
@@ -59,22 +59,10 @@ public class AlimentoController {
      * @param alimento
      * @throws BusinessException
      */
-<<<<<<< HEAD
-    public void save(Alimento alimento) throws BusinessException {
-        alimentoDAO = new AlimentoDAO();
-        alimento = alimentoDAO.save(alimento);
-        Alimento a = new Alimento(alimento.getId(), alimento.getNome(), alimento.getTipo());
-        a.setPorcaoList(alimento.getPorcaoList());
-        a.setCaracteristicaAlimentoList(alimento.getCaracteristicaAlimentoList());
-=======
     public void saveAlimento(Alimento alimento) throws BusinessException {
         alimentoDAO = new AlimentoDAO();
         alimento = alimentoDAO.save(alimento);
         Alimento a = new Alimento(alimento.getId(), alimento.getNome(), alimento.getTipo());
-<<<<<<< HEAD
->>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
-=======
->>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
         model.removeAlimento(alimento);
         model.addAlimento(a);
     }
