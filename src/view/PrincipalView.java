@@ -231,14 +231,14 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_sobreMenuItemActionPerformed
 
     private void consultaAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaAlimentoMenuItemActionPerformed
-        TelaConsultaAlimento frame;
+        ManutencaoAlimentoView frame;
 
         if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_ALIMENTO)) {
-            frame = (TelaConsultaAlimento) DesktopManager.get(DesktopManager.TELA_CONSULTA_ALIMENTO);
+            frame = (ManutencaoAlimentoView) DesktopManager.get(DesktopManager.TELA_CONSULTA_ALIMENTO);
             desktopPane.setSelectedFrame(frame);
             frame.pack();
         } else {
-            frame = new TelaConsultaAlimento();
+            frame = new ManutencaoAlimentoView();
             desktopPane.add(frame);
             DesktopManager.add(DesktopManager.TELA_CONSULTA_ALIMENTO, frame);
         }

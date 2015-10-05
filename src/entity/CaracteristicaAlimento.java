@@ -73,6 +73,12 @@ public class CaracteristicaAlimento implements Serializable {
         this.id = id;
         this.descricao = descricao;
     }
+    
+    public CaracteristicaAlimento(Long id, String descricao, float valor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
 
     /**
      *
