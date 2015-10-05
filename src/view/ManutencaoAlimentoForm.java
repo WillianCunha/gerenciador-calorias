@@ -41,26 +41,36 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
      */
     public ManutencaoAlimentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        myInit();
         initComponents();
+    }
+
+    private void myInit() {
+        AlimentoEnum[] alimentos = AlimentoEnum.values();
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for (AlimentoEnum alimento : alimentos) {                        
+            dcbm.addElement(alimento.getDescricao());
+        }
+        tipoCriteria.setModel(dcbm);
     }
 
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
-        
+
         Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, model,
                 ELProperty.create("${registroEditado.id}"), idField, BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        
+
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
                 ELProperty.create("${registroEditado.nome}"), nomeField, BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        
+
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
                 ELProperty.create("${tipoCriteria}"), tipoCriteria, BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
-        
+
         bindingGroup.bind();
     }
 
@@ -98,8 +108,6 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         jLabel1.setText("ID:");
 
         jLabel2.setText("Nome:");
-
-        tipoCriteria.setModel(new DefaultComboBoxModel<>(AlimentoEnum.values()));
 
         masterTable.setModel(new CaracteristicaAlimentoTableModel());
         jScrollPane1.setViewportView(masterTable);
@@ -289,7 +297,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             fireTableDataChanged();
         }
     }
-    
+
     private class CaracteristicaAlimentoMasterTableListSelectionListener implements ListSelectionListener {
 
         @Override
@@ -304,7 +312,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
                 model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
             }
         }
-        
+
     }
-    
+
 }
