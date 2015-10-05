@@ -71,6 +71,9 @@ public class AlimentoController {
         alimentoDAO = new AlimentoDAO();
         alimento = alimentoDAO.save(alimento);
         Alimento a = new Alimento(alimento.getId(), alimento.getNome(), alimento.getTipo());
+<<<<<<< HEAD
+>>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
+=======
 >>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
         model.removeAlimento(alimento);
         model.addAlimento(a);

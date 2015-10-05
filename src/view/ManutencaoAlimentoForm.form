@@ -25,6 +25,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -52,6 +53,8 @@
                                   <Component id="idField" max="32767" attributes="0"/>
                                   <Component id="jComboBox1" alignment="0" pref="340" max="32767" attributes="0"/>
 =======
+=======
+>>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -79,6 +82,9 @@
                                   <Component id="nomeField" max="32767" attributes="0"/>
                                   <Component id="idField" max="32767" attributes="0"/>
                                   <Component id="tipoCriteria" alignment="0" max="32767" attributes="0"/>
+<<<<<<< HEAD
+>>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
+=======
 >>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
                               </Group>
                           </Group>
@@ -93,8 +99,11 @@
                   </Group>
               </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <EmptySpace max="32767" attributes="0"/>
 =======
+=======
+>>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
               <EmptySpace max="-2" attributes="0"/>
 >>>>>>> 0925dd2439598a0ae34773ff8b39981c0e9f469e
           </Group>
