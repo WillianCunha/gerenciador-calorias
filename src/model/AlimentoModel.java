@@ -80,7 +80,7 @@ public class AlimentoModel extends BindableModel {
     }
 
     public void setRegistroSelecionado(Alimento alimento) {
-        this.registroSelecionado = alimento;
+        this.registroSelecionado = alimento;        
         firePropertyChange("registroSelecionado", null, alimento);
     }
     

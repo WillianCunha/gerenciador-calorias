@@ -6,20 +6,24 @@
 package view;
 
 import control.AlimentoController;
+import control.CaracteristicaAlimentoController;
 import entity.CaracteristicaAlimento;
 import entity.UnidadePadrao;
 import exception.BusinessException;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.AlimentoEnum;
 import model.AlimentoModel;
+import model.CaracteristicaAlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -35,6 +39,8 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
     private AlimentoController controller;
     private AlimentoModel model;
+    private CaracteristicaAlimentoController caracController;
+    private CaracteristicaAlimentoModel caracModel;
 
     /**
      * Creates new form ManutencaoAlimentoForm
@@ -77,6 +83,8 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     public void setController(AlimentoController controller) {
         this.controller = controller;
         this.model = this.controller.getModel();
+//        this.caracController = caracController;
+//        this.caracModel = this.caracController.getModel();
         doBindings();
     }
 
@@ -113,6 +121,11 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(masterTable);
 
         addCaracteristicaButton.setText("Adicionar Característica");
+        addCaracteristicaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCaracteristicaButtonActionPerformed(evt);
+            }
+        });
 
         removeCaracteristicaButton.setText("Remover Característica");
 
@@ -126,6 +139,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         });
 
         idField.setEditable(false);
+        idField.setEnabled(false);
 
         jLabel3.setText("Tipo:");
 
@@ -203,6 +217,19 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void addCaracteristicaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCaracteristicaButtonActionPerformed
+        caracModel.setBackupRegistro(caracModel.getRegistroSelecionado());
+        CaracteristicaAlimento caracAlimento = new CaracteristicaAlimento();
+//        caracModel.setRegistroEditado(caracAlimento);
+        caracModel.setRegistroEditado(caracAlimento);
+        new Thread(() -> {
+            ManutencaoCaracteristicaAlimentoForm form = new ManutencaoCaracteristicaAlimentoForm((Frame) SwingUtilities.windowForComponent(this), true);
+            form.setTitle("Adicionar Característica");
+            form.setController(caracController);
+            form.setVisible(true);
+        }).start();
+    }//GEN-LAST:event_addCaracteristicaButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCaracteristicaButton;
