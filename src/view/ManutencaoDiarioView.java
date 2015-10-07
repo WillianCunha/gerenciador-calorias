@@ -103,6 +103,11 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(masterTable);
 
         closeButton.setText("Fechar");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Remover");
 
@@ -165,6 +170,11 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         DesktopManager.remove(DesktopManager.MANUTENCAO_DIARIO_VIEW);
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
