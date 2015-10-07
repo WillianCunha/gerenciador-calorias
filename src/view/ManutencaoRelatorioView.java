@@ -97,6 +97,11 @@ public class ManutencaoRelatorioView extends javax.swing.JInternalFrame {
         jTextField9.setEnabled(false);
 
         closeButton.setText("Fechar");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Salvar");
 
@@ -188,6 +193,10 @@ public class ManutencaoRelatorioView extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         DesktopManager.remove(DesktopManager.MANUTENCAO_RELATORIO_VIEW);
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

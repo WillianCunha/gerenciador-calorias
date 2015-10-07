@@ -28,7 +28,7 @@ public class DiarioController implements IController {
 //        model.setFilterCriteria("Data");
 //        model.setFilterValue("");
         diarioDAO = new DiarioDAO();
-        Diario diario = diarioDAO.findByUsuario(usuario);
+//        Diario diario = diarioDAO.findByUsuario(usuario);
     }
     
     public void remove(Diario diario) throws BusinessException {

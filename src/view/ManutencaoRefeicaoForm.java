@@ -5,12 +5,19 @@
  */
 package view;
 
+import control.RefeicaoController;
+import java.awt.Frame;
+import javax.swing.SwingUtilities;
+import model.RefeicaoModel;
+
 /**
  *
  * @author visitante
  */
 public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
 
+    private RefeicaoModel model = new RefeicaoModel();
+    private RefeicaoController controller = new RefeicaoController(model);
     /**
      * Creates new form ManutencaoRefeicaoForm
      */
@@ -70,6 +77,11 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         removeAlimentoButton.setText("Remover Alimento");
 
         createAlimentoButton.setText("Cadastrar Alimento");
+        createAlimentoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAlimentoButtonActionPerformed(evt);
+            }
+        });
 
         closeButton.setText("Fechar");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +153,15 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void createAlimentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAlimentoButtonActionPerformed
+        new Thread(() -> {
+            ManutencaoAlimentoForm form = new ManutencaoAlimentoForm((Frame) SwingUtilities.windowForComponent(this), true);
+            form.setTitle("Adicionar Alimento");
+            form.setController(controller);
+            form.setVisible(true);
+        }).start();
+    }//GEN-LAST:event_createAlimentoButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@
 package view;
 
 import control.AlimentoController;
+import control.RefeicaoController;
 import entity.CaracteristicaAlimento;
 import entity.UnidadePadrao;
 import exception.BusinessException;
@@ -274,6 +275,10 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     private javax.swing.JButton saveButton;
     private javax.swing.JComboBox tipoCriteria;
     // End of variables declaration//GEN-END:variables
+
+    void setController(RefeicaoController controller) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private class CaracteristicaAlimentoTableModel extends AbstractTableModel {
 

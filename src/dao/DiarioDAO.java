@@ -45,10 +45,10 @@ public class DiarioDAO implements IDAO<Diario> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Diario findByUsuario(Usuario usuario) {
+    public List<Diario> findByUsuario(Usuario usuario) {
         TypedQuery<Diario> query = manager.createQuery("from Diario d inner join fetch d.usuario where d.usuario = :usuario", Diario.class)
                 .setParameter("usuario", usuario);
-        Diario result = (Diario) query.getResultList();
+        List<Diario> result = query.getResultList();
         manager.close();
         return result;
     }
