@@ -72,6 +72,11 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         createAlimentoButton.setText("Cadastrar Alimento");
 
         closeButton.setText("Fechar");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Salvar");
 
@@ -132,6 +137,10 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
