@@ -487,7 +487,7 @@ public class ManutencaoPesoUsuarioView extends JInternalFrame {
                 backup.setPeso(p.getPeso());
                 backup.setUsuario(p.getUsuario());
                 model.setBackupRegistro(backup);
-                
+
                 Peso selecionado = new Peso(p.getId());
                 selecionado.setData(p.getData());
                 selecionado.setPeso(p.getPeso());

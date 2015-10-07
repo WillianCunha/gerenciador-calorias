@@ -5,17 +5,45 @@
  */
 package view;
 
+import control.DiarioController;
+import entity.Diario;
+import entity.Refeicao;
+import entity.Registro;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import model.DiarioModel;
+import org.jdesktop.beansbinding.BindingGroup;
+import session.SessionManager;
+
 /**
  *
  * @author Aluca
  */
 public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
 
+    private DiarioModel model = new DiarioModel();
+    private DiarioController controller = new DiarioController(model);
+    
     /**
      * Creates new form ManutencaoDiarioView
      */
     public ManutencaoDiarioView() {
         initComponents();
+        controller.carregarDiario(SessionManager.getUsuarioLogado());
+        doBindings();
+    }
+    
+    private void doBindings() {
+        BindingGroup bindingGroup = new BindingGroup();        
+        
     }
 
     /**
@@ -26,6 +54,17 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        filterCriteriaField = new javax.swing.JComboBox();
+        filterValueField = new javax.swing.JFormattedTextField();
+        applyFilterButton = new javax.swing.JButton();
+        clearFilterButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        masterTable = new javax.swing.JTable();
+        closeButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -48,15 +87,76 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        filterCriteriaField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data" }));
+
+        try {
+            filterValueField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        applyFilterButton.setText("Aplicar");
+
+        clearFilterButton.setText("Limpar");
+
+        masterTable.setModel(new DiarioTableModel());
+        jScrollPane1.setViewportView(masterTable);
+
+        closeButton.setText("Fechar");
+
+        removeButton.setText("Remover");
+
+        updateButton.setText("Alterar");
+
+        addButton.setText("Adicionar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(filterCriteriaField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterValueField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(applyFilterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearFilterButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filterCriteriaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterValueField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(applyFilterButton)
+                    .addComponent(clearFilterButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(closeButton)
+                    .addComponent(removeButton)
+                    .addComponent(updateButton)
+                    .addComponent(addButton))
+                .addContainerGap())
         );
 
         pack();
@@ -68,5 +168,118 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton applyFilterButton;
+    private javax.swing.JButton clearFilterButton;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JComboBox filterCriteriaField;
+    private javax.swing.JFormattedTextField filterValueField;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable masterTable;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+
+    private class DiarioTableModel extends AbstractTableModel {
+
+        private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        private Diario diario;
+        private List<Refeicao> refeicoes;
+        private final String[] columnNames = {"ID", "Data", "Refeições", "Calorias"};
+        private final int COLUMN_COUNT = columnNames.length;
+
+        public DiarioTableModel() {
+            diario = new Diario();
+            refeicoes = new ArrayList();
+        }
+
+        public DiarioTableModel(Diario diario) {
+            this();
+            this.diario = diario;
+        }
+        
+        public DiarioTableModel(Diario diario, List<Refeicao> refeicoes) {
+            this();
+            this.refeicoes.addAll(refeicoes);
+        }
+
+        @Override
+        public int getRowCount() {
+            return refeicoes.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return COLUMN_COUNT;
+        }
+
+        @Override
+        public String getColumnName(int i) {
+            return columnNames[i];
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Refeicao refeicao = refeicoes.get(rowIndex);
+            Registro registro = refeicoes.get(rowIndex).getRegistro();
+            switch (columnIndex) {
+                case 0: // ID
+                    return diario.getId();
+                case 1: // Data
+                    // Não sei exatamento como resgatar a Data de um dia do diario
+                    return registro.getData();
+                case 2: // Número de refeições
+                    return registro.getRefeicaoList().size();
+                case 3: // Total calórico diário
+                // TODO contabilizar e apresentar o total calórico do dia
+                default:
+                    return "";
+            }
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {            
+            Registro registro = diario.getRegistroList().get(rowIndex);
+            int numRefeicoes = 0;
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            switch (columnIndex) {
+                case 0: // ID
+                    try {
+                        diario.setId(Long.parseLong(aValue.toString()));
+                    } catch (NumberFormatException ex) {
+                        Logger.getLogger(ManutencaoDiarioView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case 1: // Data
+                    try {
+                        registro.setData(df.parse(aValue.toString()));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ManutencaoDiarioView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                case 2: // Número de refeições, não sei exatamento como fazer
+                    numRefeicoes = Integer.parseInt(aValue.toString());
+                    break;
+                case 3: // Total calórico diário
+                    break;                    
+            }
+            fireTableDataChanged();
+        }
+
+    }
+    
+    private class DiarioMasterTableListSelectionListener implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            int row = masterTable.getSelectedRow();
+            if (row >= 0) {
+//                Refeicao = model.get
+            }
+        }
+        
+    }
+
 }
