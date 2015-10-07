@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,114 +50,61 @@ public class Registro implements Serializable {
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "registro", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "registro")
     private List<Refeicao> refeicaoList;
     @JoinColumn(name = "diario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Diario diario;
 
-    /**
-     *
-     */
     public Registro() {
     }
 
-    /**
-     *
-     * @param id
-     */
     public Registro(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @param id
-     * @param data
-     * @param hora
-     */
     public Registro(Long id, Date data, Date hora) {
         this.id = id;
         this.data = data;
         this.hora = hora;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getData() {
         return data;
     }
 
-    /**
-     *
-     * @param data
-     */
     public void setData(Date data) {
         this.data = data;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getHora() {
         return hora;
     }
 
-    /**
-     *
-     * @param hora
-     */
     public void setHora(Date hora) {
         this.hora = hora;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Refeicao> getRefeicaoList() {
         return refeicaoList;
     }
 
-    /**
-     *
-     * @param refeicaoList
-     */
     public void setRefeicaoList(List<Refeicao> refeicaoList) {
         this.refeicaoList = refeicaoList;
     }
 
-    /**
-     *
-     * @return
-     */
     public Diario getDiario() {
         return diario;
     }
 
-    /**
-     *
-     * @param diario
-     */
     public void setDiario(Diario diario) {
         this.diario = diario;
     }

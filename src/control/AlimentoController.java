@@ -7,6 +7,7 @@ package control;
 
 import dao.AlimentoDAO;
 import entity.Alimento;
+import entity.CaracteristicaAlimento;
 import exception.BusinessException;
 import java.util.List;
 import java.util.function.Predicate;
@@ -19,8 +20,8 @@ import model.AlimentoModel;
  */
 public class AlimentoController {
 
-    private final AlimentoModel model;
     private AlimentoDAO alimentoDAO;
+    private final AlimentoModel model;
 
     /**
      *
@@ -30,6 +31,11 @@ public class AlimentoController {
         this.model = model;
     }
 
+    /**
+     * Efetua carga a partir dos registros da tabela alimento
+     *
+     * 
+     */
     public void carregarAlimentos() {
         model.setFilterCriteria("Nome");
         model.setFilterValue("");
@@ -37,7 +43,12 @@ public class AlimentoController {
         List<Alimento> alimentos = alimentoDAO.findAll();
         model.setAlimentos(alimentos);
     }
-    
+
+    /**
+     *
+     * @param alimento
+     * @throws BusinessException
+     */
     public void remove(Alimento alimento) throws BusinessException {
         alimentoDAO = new AlimentoDAO();
         alimentoDAO.remove(alimento);
@@ -57,32 +68,51 @@ public class AlimentoController {
         model.addAlimento(a);
     }
 
+    /**
+     *
+     * @return
+     */
     public AlimentoModel getModel() {
         return model;
     }
-    
+
+    /**
+     *
+     * @param value
+     * @param criteria
+     */
     public void doFilter(String value, String criteria) {
         Predicate<Alimento> predicate;
 
         switch (criteria) {
             case "Nome":
                 try {
-                    predicate = (Alimento alimento) -> alimento.getNome().compareTo(value) == 0;
+                    predicate = (Alimento alimento) -> alimento.getNome().equalsIgnoreCase(value);
                     List<Alimento> resultado = model.getAlimentos().stream().filter(predicate).collect(Collectors.toList());
                     model.setBackupAlimentos(model.getAlimentos());
                     model.setAlimentos(resultado);
                 } catch (Exception ex) {
+
                 }
                 break;
             case "Tipo":
                 try {
-                    predicate = (Alimento alimento) -> alimento.getTipo().compareTo(value) == 0;
+                    predicate = (Alimento alimento) -> alimento.getTipo().equalsIgnoreCase(value);
                     List<Alimento> resultado = model.getAlimentos().stream().filter(predicate).collect(Collectors.toList());
                     model.setBackupAlimentos(model.getAlimentos());
                     model.setAlimentos(resultado);
                 } catch (Exception ex) {
+
                 }
                 break;
         }
+    }
+
+    public void carregarCaracteristicas(Alimento alimento) {
+        model.setFilterCriteria("Descrição");
+        model.setFilterValue("");
+        alimentoDAO = new AlimentoDAO();
+        List<CaracteristicaAlimento> caracteristicas = alimentoDAO.findByAlimento(alimento);
+        model.setCaracteristicas(caracteristicas);
     }
 }

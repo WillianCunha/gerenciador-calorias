@@ -10,7 +10,6 @@ import exception.BusinessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDesktopPane;
 import model.AlimentoEnum;
 import model.AlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
@@ -202,11 +201,11 @@ public class TelaCadastroAlimento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            controller.saveAlimento(model.getAlimento());
-        } catch (BusinessException ex) {
-            Logger.getLogger(TelaCadastroAlimento.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            controller.saveAlimento(model.getAlimento());
+//        } catch (BusinessException ex) {
+//            Logger.getLogger(TelaCadastroAlimento.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void addAtributoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAtributoButtonActionPerformed

@@ -16,7 +16,7 @@ public class PesoComparator implements Comparator<Peso> {
 
     @Override
     public int compare(Peso o1, Peso o2) {
-        return (o1.getId()< o2.getId() ? -1 : (o1.getId().longValue() == o2.getId()) ? 0 : 1);
+        return (o1.getId() < o2.getId() ? -1 : (o1.getId().longValue() == o2.getId()) ? 0 : 1);
     }
 
 }

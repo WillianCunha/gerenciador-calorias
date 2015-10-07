@@ -80,7 +80,7 @@ public class AlimentoModel extends BindableModel {
     }
 
     public void setRegistroSelecionado(Alimento alimento) {
-        this.registroSelecionado = alimento;
+        this.registroSelecionado = alimento;        
         firePropertyChange("registroSelecionado", null, alimento);
     }
     
@@ -145,5 +145,11 @@ public class AlimentoModel extends BindableModel {
         this.alimentos.add(alimento);
 //        this.alimentos.sort(null);
         firePropertyChange("alimentos", null, Collections.unmodifiableList(alimentos));
+    }
+
+    public void setCaracteristicas(List<CaracteristicaAlimento> caracteristicas) {
+        caracteristicas.sort(new CaracteristicaComparator());
+        this.caracteristicas = ObservableCollections.observableList(caracteristicas);
+        firePropertyChange("caracteristicas", null, Collections.unmodifiableList(caracteristicas));
     }
 }

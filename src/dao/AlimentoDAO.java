@@ -6,9 +6,11 @@
 package dao;
 
 import entity.Alimento;
+import entity.CaracteristicaAlimento;
 import exception.BusinessException;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import util.JPAUtil;
 
 /**
@@ -50,5 +52,13 @@ public class AlimentoDAO implements IDAO<Alimento> {
         List<Alimento> alimentos = manager.createNamedQuery("Alimento.findAll", Alimento.class).getResultList();
         manager.close();
         return alimentos;
+    }
+
+    public List<CaracteristicaAlimento> findByAlimento(Alimento alimento) {
+        TypedQuery<CaracteristicaAlimento> query = manager.createQuery("from CaracteristicaAlimento c inner join fetch c.alimento where c.alimento = :alimento", CaracteristicaAlimento.class).
+                setParameter("alimento", alimento);
+        List<CaracteristicaAlimento> result = query.getResultList();
+        manager.close();
+        return result;
     }
 }

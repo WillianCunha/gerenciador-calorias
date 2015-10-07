@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,8 +36,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByAltura", query = "SELECT u FROM Usuario u WHERE u.altura = :altura"),
     @NamedQuery(name = "Usuario.findByDataNascimento", query = "SELECT u FROM Usuario u WHERE u.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero"),
-    @NamedQuery(name = "Usuario.findByLoginSenha", query = "from Usuario u where u.login = :login and u.senha = :senha")})
+    @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,32 +61,18 @@ public class Usuario implements Serializable {
     private Date dataNascimento;
     @Column(name = "genero")
     private Character genero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Peso> pesoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Diario> diarioList;
 
-    /**
-     *
-     */
     public Usuario() {
     }
 
-    /**
-     *
-     * @param id
-     */
     public Usuario(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @param id
-     * @param nome
-     * @param login
-     * @param senha
-     */
     public Usuario(Long id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
@@ -96,156 +80,74 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     *
-     * @param nome
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getLogin() {
         return login;
     }
 
-    /**
-     *
-     * @param login
-     */
     public void setLogin(String login) {
         this.login = login;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getSenha() {
         return senha;
     }
 
-    /**
-     *
-     * @param senha
-     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
-    /**
-     *
-     * @return
-     */
     public Float getAltura() {
         return altura;
     }
 
-    /**
-     *
-     * @param altura
-     */
     public void setAltura(Float altura) {
         this.altura = altura;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    /**
-     *
-     * @param dataNascimento
-     */
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    /**
-     *
-     * @return
-     */
     public Character getGenero() {
         return genero;
     }
 
-    /**
-     *
-     * @param genero
-     */
     public void setGenero(Character genero) {
         this.genero = genero;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Peso> getPesoList() {
         return pesoList;
     }
-    
-    // Adicionado addPeso ao modelo
 
-    /**
-     *
-     * @param peso
-     */
-        public void addPeso(Peso peso) {
-        this.pesoList.add(peso);
-    }
-
-    /**
-     *
-     * @param pesoList
-     */
     public void setPesoList(List<Peso> pesoList) {
         this.pesoList = pesoList;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Diario> getDiarioList() {
         return diarioList;
     }
 
-    /**
-     *
-     * @param diarioList
-     */
     public void setDiarioList(List<Diario> diarioList) {
         this.diarioList = diarioList;
     }

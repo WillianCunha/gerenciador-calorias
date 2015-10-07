@@ -5,17 +5,17 @@
  */
 package model;
 
-import entity.Usuario;
+import entity.Alimento;
 import java.util.Comparator;
 
 /**
  *
  * @author winston.sonnesen
  */
-public class UsuarioComparator implements Comparator<Usuario> {
+public class AlimentoComparator implements Comparator<Alimento> {
 
     @Override
-    public int compare(Usuario o1, Usuario o2) {
+    public int compare(Alimento o1, Alimento o2) {
         return (o1.getId()< o2.getId() ? -1 : (o1.getId().longValue() == o2.getId()) ? 0 : 1);
     }
 

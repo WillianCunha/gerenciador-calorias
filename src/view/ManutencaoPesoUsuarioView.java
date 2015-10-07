@@ -482,8 +482,17 @@ public class ManutencaoPesoUsuarioView extends JInternalFrame {
             int row = masterTable.getSelectedRow();
             if (row >= 0) {
                 Peso p = model.getPesos().get(row);
-                model.setBackupRegistro(new Peso(p.getId(), p.getData(), p.getPeso(), p.getUsuario()));
-                model.setRegistroSelecionado(new Peso(p.getId(), p.getData(), p.getPeso(), p.getUsuario()));
+                Peso backup = new Peso(p.getId());
+                backup.setData(p.getData());
+                backup.setPeso(p.getPeso());
+                backup.setUsuario(p.getUsuario());
+                model.setBackupRegistro(backup);
+                
+                Peso selecionado = new Peso(p.getId());
+                selecionado.setData(p.getData());
+                selecionado.setPeso(p.getPeso());
+                selecionado.setUsuario(p.getUsuario());
+                model.setRegistroSelecionado(selecionado);
             }
         }
     }

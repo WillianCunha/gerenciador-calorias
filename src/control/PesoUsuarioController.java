@@ -66,7 +66,10 @@ public class PesoUsuarioController implements IController {
     public void save(Peso peso) throws BusinessException {
         pesoDAO = new PesoUsuarioDAO();
         peso = pesoDAO.save(peso);
-        Peso p = new Peso(peso.getId(), peso.getData(), peso.getPeso(), peso.getUsuario());
+        Peso p = new Peso(peso.getId());
+        p.setData(peso.getData());
+        p.setPeso(peso.getPeso());
+        p.setUsuario(peso.getUsuario());
         model.removePeso(peso);
         model.addPeso(p);
     }

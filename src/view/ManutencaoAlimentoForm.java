@@ -9,12 +9,14 @@ import control.AlimentoController;
 import entity.CaracteristicaAlimento;
 import entity.UnidadePadrao;
 import exception.BusinessException;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -26,6 +28,8 @@ import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
 /**
  *
@@ -39,16 +43,17 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     /**
      * Creates new form ManutencaoAlimentoForm
      */
-    public ManutencaoAlimentoForm(java.awt.Frame parent, boolean modal) {
+    public ManutencaoAlimentoForm(Frame parent, boolean modal) {
         super(parent, modal);
-        myInit();
+        //controller.carregarCaracteristicas(SessionManager.getAlimentoAtivo());
         initComponents();
+        myInit();
     }
 
     private void myInit() {
         AlimentoEnum[] alimentos = AlimentoEnum.values();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        for (AlimentoEnum alimento : alimentos) {                        
+        for (AlimentoEnum alimento : alimentos) {
             dcbm.addElement(alimento.getDescricao());
         }
         tipoCriteria.setModel(dcbm);
@@ -56,6 +61,24 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
+
+        JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ, model,
+                ELProperty.create("${registroEditado.caracteristicaAlimentoList}"), masterTable);
+
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${id}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Long.class);
+
+        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${descricao}"));
+        columnBinding.setColumnName("Descrição");
+        columnBinding.setColumnClass(String.class);
+
+        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${valor}"));
+        columnBinding.setColumnName("Valor");
+        columnBinding.setColumnClass(Float.class);
+
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
 
         Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, model,
                 ELProperty.create("${registroEditado.id}"), idField, BeanProperty.create("text"));
@@ -68,7 +91,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         bindingGroup.addBinding(binding);
 
         binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ_WRITE, model,
-                ELProperty.create("${tipoCriteria}"), tipoCriteria, BeanProperty.create("selectedItem"));
+                ELProperty.create("${registroEditado.tipo}"), tipoCriteria, BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
         bindingGroup.bind();
@@ -113,10 +136,25 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(masterTable);
 
         addCaracteristicaButton.setText("Adicionar Característica");
+        addCaracteristicaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCaracteristicaButtonActionPerformed(evt);
+            }
+        });
 
         removeCaracteristicaButton.setText("Remover Característica");
+        removeCaracteristicaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCaracteristicaButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Fechar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Salvar");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +164,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         });
 
         idField.setEditable(false);
+        idField.setEnabled(false);
 
         jLabel3.setText("Tipo:");
 
@@ -136,27 +175,24 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(addCaracteristicaButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(removeCaracteristicaButton))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                .addComponent(addCaracteristicaButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomeField)
-                                    .addComponent(idField)
-                                    .addComponent(tipoCriteria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(removeCaracteristicaButton))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeField)
+                            .addComponent(idField)
+                            .addComponent(tipoCriteria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveButton)
@@ -206,6 +242,23 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void addCaracteristicaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCaracteristicaButtonActionPerformed
+        new Thread(() -> {
+            ManutencaoCaracteristicaAlimentoForm form = new ManutencaoCaracteristicaAlimentoForm((Frame) SwingUtilities.windowForComponent(this), true);
+            form.setTitle("Adicionar Característica");
+            form.setController(this.controller);
+            form.setVisible(true);            
+        }).start();
+    }//GEN-LAST:event_addCaracteristicaButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void removeCaracteristicaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCaracteristicaButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeCaracteristicaButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCaracteristicaButton;
@@ -308,8 +361,15 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             int row = masterTable.getSelectedRow();
             if (row >= 0) {
                 CaracteristicaAlimento c = model.getCaracteristicaAlimentos().get(row);
-                model.setBackupRegistroCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
-                model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
+                CaracteristicaAlimento backup = new CaracteristicaAlimento(c.getId());
+                backup.setDescricao(c.getDescricao());
+                backup.setValor(c.getValor());
+                model.setBackupRegistroCaracteristicaAlimento(backup);
+
+                CaracteristicaAlimento selecionado = new CaracteristicaAlimento(c.getId());
+                selecionado.setDescricao(c.getDescricao());
+                selecionado.setValor(c.getValor());
+                model.setRegistroSelecionadoCaracteristicaAlimento(selecionado);
             }
         }
 
