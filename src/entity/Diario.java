@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,85 +41,46 @@ public class Diario implements Serializable {
     @Column(name = "nome")
     private String nome;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Usuario usuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diario", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diario")
     private List<Registro> registroList;
 
-    /**
-     *
-     */
     public Diario() {
     }
 
-    /**
-     *
-     * @param id
-     */
     public Diario(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     *
-     * @param nome
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     *
-     * @return
-     */
     public Usuario getUsuario() {
         return usuario;
     }
 
-    /**
-     *
-     * @param usuario
-     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Registro> getRegistroList() {
         return registroList;
     }
 
-    /**
-     *
-     * @param registroList
-     */
     public void setRegistroList(List<Registro> registroList) {
         this.registroList = registroList;
     }

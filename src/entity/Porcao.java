@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,105 +39,58 @@ public class Porcao implements Serializable {
     @Column(name = "quantidade")
     private Float quantidade;
     @JoinColumn(name = "alimento_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Alimento alimento;
     @JoinColumn(name = "refeicao_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Refeicao refeicao;
     @JoinColumn(name = "unidade_padrao_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private UnidadePadrao unidadePadrao;
 
-    /**
-     *
-     */
     public Porcao() {
     }
 
-    /**
-     *
-     * @param id
-     */
     public Porcao(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Float getQuantidade() {
         return quantidade;
     }
 
-    /**
-     *
-     * @param quantidade
-     */
     public void setQuantidade(Float quantidade) {
         this.quantidade = quantidade;
     }
 
-    /**
-     *
-     * @return
-     */
     public Alimento getAlimento() {
         return alimento;
     }
 
-    /**
-     *
-     * @param alimento
-     */
     public void setAlimento(Alimento alimento) {
         this.alimento = alimento;
     }
 
-    /**
-     *
-     * @return
-     */
     public Refeicao getRefeicao() {
         return refeicao;
     }
 
-    /**
-     *
-     * @param refeicao
-     */
     public void setRefeicao(Refeicao refeicao) {
         this.refeicao = refeicao;
     }
 
-    /**
-     *
-     * @return
-     */
     public UnidadePadrao getUnidadePadrao() {
         return unidadePadrao;
     }
 
-    /**
-     *
-     * @param unidadePadrao
-     */
     public void setUnidadePadrao(UnidadePadrao unidadePadrao) {
         this.unidadePadrao = unidadePadrao;
     }

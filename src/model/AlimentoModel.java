@@ -146,4 +146,10 @@ public class AlimentoModel extends BindableModel {
 //        this.alimentos.sort(null);
         firePropertyChange("alimentos", null, Collections.unmodifiableList(alimentos));
     }
+
+    public void setCaracteristicas(List<CaracteristicaAlimento> caracteristicas) {
+        caracteristicas.sort(new CaracteristicaComparator());
+        this.caracteristicas = ObservableCollections.observableList(caracteristicas);
+        firePropertyChange("caracteristicas", null, Collections.unmodifiableList(caracteristicas));
+    }
 }

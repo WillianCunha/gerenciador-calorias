@@ -6,6 +6,8 @@
 package control;
 
 import dao.CaracteristicaAlimentoDAO;
+import entity.CaracteristicaAlimento;
+import java.util.List;
 import model.CaracteristicaAlimentoModel;
 
 /**
@@ -14,11 +16,19 @@ import model.CaracteristicaAlimentoModel;
  */
 public class CaracteristicaAlimentoController {
     
-    private CaracteristicaAlimentoDAO caracteristicaAlimentoDAO;
+    private CaracteristicaAlimentoDAO caracAlimentoDAO;
     private final CaracteristicaAlimentoModel model;
     
     public CaracteristicaAlimentoController(CaracteristicaAlimentoModel model) {
         this.model = model;
+    }
+    
+    public void carregarCaracteristicas() {
+        model.setFilterCriteria("Descrição");
+        model.setFilterValue("");
+        caracAlimentoDAO = new CaracteristicaAlimentoDAO();
+        List<CaracteristicaAlimento> caracteristicas = caracAlimentoDAO.findAll();
+        model.setCaracsAlimentos(caracteristicas);
     }
     
     public CaracteristicaAlimentoModel getModel() {

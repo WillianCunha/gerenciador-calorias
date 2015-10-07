@@ -18,6 +18,7 @@ public class CaracteristicaAlimentoModel extends BindableModel {
     private CaracteristicaAlimento backupRegistro;
     private CaracteristicaAlimento registroEditado;
     private List<CaracteristicaAlimento> caracsAlimentos;
+    private String filterCriteria = "Descrição";
     
     public CaracteristicaAlimentoModel() {
         caracAlimento = new CaracteristicaAlimento();
@@ -52,5 +53,18 @@ public class CaracteristicaAlimentoModel extends BindableModel {
     public void setRegistroEditado(CaracteristicaAlimento registroEditado) {
         this.registroEditado = registroEditado;
         firePropertyChange("registroEditado", null, registroEditado);
+    }
+
+    public void setFilterCriteria(String filterCriteria) {
+        this.filterCriteria = filterCriteria;
+        firePropertyChange("filterCriteria", null, filterCriteria);
+    }
+
+    public void setFilterValue(String filterValue) {
+//        this.filterValue = filterValue;
+    }
+
+    public void setCaracsAlimentos(List<CaracteristicaAlimento> caracteristicas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

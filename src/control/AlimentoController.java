@@ -7,6 +7,7 @@ package control;
 
 import dao.AlimentoDAO;
 import entity.Alimento;
+import entity.CaracteristicaAlimento;
 import exception.BusinessException;
 import java.util.List;
 import java.util.function.Predicate;
@@ -105,5 +106,13 @@ public class AlimentoController {
                 }
                 break;
         }
+    }
+
+    public void carregarCaracteristicas(Alimento alimento) {
+        model.setFilterCriteria("Descrição");
+        model.setFilterValue("");
+        alimentoDAO = new AlimentoDAO();
+        List<CaracteristicaAlimento> caracteristicas = alimentoDAO.findByAlimento(alimento);
+        model.setCaracteristicas(caracteristicas);
     }
 }

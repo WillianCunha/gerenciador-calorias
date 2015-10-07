@@ -8,7 +8,10 @@ package dao;
 import entity.Usuario;
 import exception.BusinessException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 import util.JPAUtil;
@@ -93,11 +96,17 @@ public class UsuarioDAO implements IDAO<Usuario> {
      * @return
      */
     public Usuario findByLoginSenha(String login, String senha) {
-        TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.findByLoginSenha", Usuario.class)
+        TypedQuery<Usuario> query = manager.createQuery("from Usuario u where u.login = :login and u.senha = :senha", Usuario.class)
                 .setParameter("login", login)
                 .setParameter("senha", senha);
 
-        Usuario u = query.getSingleResult();
+        Usuario u = null;
+        
+        try {
+            u = query.getSingleResult();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName(),null).log(Level.SEVERE, null, ex);            
+        }
         manager.close();
         return u;
     }

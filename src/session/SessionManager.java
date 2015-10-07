@@ -5,6 +5,7 @@
  */
 package session;
 
+import entity.Alimento;
 import entity.Usuario;
 
 /**
@@ -14,6 +15,7 @@ import entity.Usuario;
 public class SessionManager {
     
     private static Usuario usuarioLogado;
+    private static Alimento alimentoAtivo;
     
     private SessionManager(){
         
@@ -33,6 +35,14 @@ public class SessionManager {
      */
     public static void setUsuarioLogado(Usuario usuario) {
         usuarioLogado = usuario;
+    }
+    
+    public static Alimento getAlimentoAtivo() {
+        return alimentoAtivo;
+    }
+    
+    public static void setAlimentoAtivo(Alimento alimento) {
+        alimentoAtivo = alimento;
     }
     
 }

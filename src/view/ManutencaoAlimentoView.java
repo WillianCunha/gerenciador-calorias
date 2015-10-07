@@ -6,11 +6,13 @@
 package view;
 
 import control.AlimentoController;
+import control.CaracteristicaAlimentoController;
 import entity.Alimento;
 import exception.BusinessException;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.AlimentoModel;
+import model.CaracteristicaAlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -37,15 +40,25 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
 
     private AlimentoModel model = new AlimentoModel();
     private AlimentoController controller = new AlimentoController(model);
-
+    private CaracteristicaAlimentoModel caracModel = new CaracteristicaAlimentoModel();
+    private CaracteristicaAlimentoController caracController = new CaracteristicaAlimentoController(caracModel);
+    
     /**
      * Creates new form TelaConsultaAlimento
      */
     public ManutencaoAlimentoView() {
         initComponents();
         controller.carregarAlimentos();
+//        caracController.carregarCaracteristicas();
         doBindings();
+        //getAlimentoAtivo();
     }
+    
+//    private void getAlimentoAtivo() {
+//        if (session.SessionManager.getAlimentoAtivo() == null) {
+//            session.SessionManager.setAlimentoAtivo(controller.getModel().getAlimento());
+//        }
+//    }
     
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
@@ -65,7 +78,7 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
         columnBinding.setColumnName("Tipo");
         columnBinding.setColumnClass(String.class);
         
-        // Adicionar demais colunas (Porção, Calorias, Unidade (?))
+        /*TODO: Adicionar demais colunas (Porção, Calorias, Unidade (?))*/
         
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -139,6 +152,8 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
         filterCriteriaField.setToolTipText("Tipo de pesquisa a ser feita");
 
         masterTable.setModel(new AlimentoTableModel());
+        masterTable.setModel(new AlimentoTableModel());
+        masterTable.getSelectionModel().addListSelectionListener(new AlimentoMasterTableListSelectionListener());
         jScrollPane1.setViewportView(masterTable);
 
         addButton.setText("Adicionar");
@@ -283,6 +298,8 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         model.setBackupRegistro(model.getRegistroSelecionado());
         Alimento alimento = new Alimento();
+        alimento.setCaracteristicaAlimentoList(Collections.emptyList());
+        alimento.setPorcaoList(Collections.emptyList());
         model.setRegistroEditado(alimento);
         new Thread(() -> {
             ManutencaoAlimentoForm form = new ManutencaoAlimentoForm((Frame) SwingUtilities.windowForComponent(this), true);

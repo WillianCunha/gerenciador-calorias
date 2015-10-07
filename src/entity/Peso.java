@@ -5,14 +5,11 @@
  */
 package entity;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
@@ -35,10 +31,8 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Peso.findAll", query = "SELECT p FROM Peso p"),
     @NamedQuery(name = "Peso.findById", query = "SELECT p FROM Peso p WHERE p.id = :id"),
     @NamedQuery(name = "Peso.findByData", query = "SELECT p FROM Peso p WHERE p.data = :data"),
-    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso"),
-    @NamedQuery(name = "Peso.findByUsuarioByPesoAtual", query = "SELECT p FROM Peso p WHERE p.usuario = :usuario")})
+    @NamedQuery(name = "Peso.findByPeso", query = "SELECT p FROM Peso p WHERE p.peso = :peso")})
 public class Peso implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,97 +47,50 @@ public class Peso implements Serializable {
     @Column(name = "peso")
     private float peso;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Usuario usuario;
 
-    /**
-     *
-     */
     public Peso() {
     }
 
-    /**
-     *
-     * @param id
-     */
     public Peso(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @param id
-     * @param data
-     * @param peso
-     * @param usuario
-     */
-    public Peso(Long id, Date data, float peso, Usuario usuario) {
+    public Peso(Long id, Date data, float peso) {
         this.id = id;
         this.data = data;
         this.peso = peso;
-        this.usuario = usuario;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getData() {
         return data;
     }
 
-    /**
-     *
-     * @param data
-     */
     public void setData(Date data) {
         this.data = data;
     }
 
-    /**
-     *
-     * @return
-     */
     public float getPeso() {
         return peso;
     }
 
-    /**
-     *
-     * @param peso
-     */
     public void setPeso(float peso) {
         this.peso = peso;
     }
 
-    /**
-     *
-     * @return
-     */
     public Usuario getUsuario() {
         return usuario;
     }
 
-    /**
-     *
-     * @param usuario
-     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -172,5 +119,5 @@ public class Peso implements Serializable {
     public String toString() {
         return "entity.Peso[ id=" + id + " ]";
     }
-
+    
 }

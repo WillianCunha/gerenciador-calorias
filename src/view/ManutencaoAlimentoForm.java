@@ -6,11 +6,12 @@
 package view;
 
 import control.AlimentoController;
-import control.CaracteristicaAlimentoController;
 import entity.CaracteristicaAlimento;
 import entity.UnidadePadrao;
 import exception.BusinessException;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,13 +24,15 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.AlimentoEnum;
 import model.AlimentoModel;
-import model.CaracteristicaAlimentoModel;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+import session.SessionManager;
 
 /**
  *
@@ -39,14 +42,13 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
     private AlimentoController controller;
     private AlimentoModel model;
-    private CaracteristicaAlimentoController caracController;
-    private CaracteristicaAlimentoModel caracModel;
 
     /**
      * Creates new form ManutencaoAlimentoForm
      */
-    public ManutencaoAlimentoForm(java.awt.Frame parent, boolean modal) {
+    public ManutencaoAlimentoForm(Frame parent, boolean modal) {
         super(parent, modal);
+        //controller.carregarCaracteristicas(SessionManager.getAlimentoAtivo());
         initComponents();
         myInit();
     }
@@ -54,7 +56,7 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     private void myInit() {
         AlimentoEnum[] alimentos = AlimentoEnum.values();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        for (AlimentoEnum alimento : alimentos) {                        
+        for (AlimentoEnum alimento : alimentos) {
             dcbm.addElement(alimento.getDescricao());
         }
         tipoCriteria.setModel(dcbm);
@@ -62,6 +64,24 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
 
     private void doBindings() {
         BindingGroup bindingGroup = new BindingGroup();
+
+        JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ, model,
+                ELProperty.create("${registroEditado.caracteristicaAlimentoList}"), masterTable);
+
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${id}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Long.class);
+
+        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${descricao}"));
+        columnBinding.setColumnName("Descrição");
+        columnBinding.setColumnClass(String.class);
+
+        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${valor}"));
+        columnBinding.setColumnName("Valor");
+        columnBinding.setColumnClass(Float.class);
+
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
 
         Binding binding = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ, model,
                 ELProperty.create("${registroEditado.id}"), idField, BeanProperty.create("text"));
@@ -83,8 +103,6 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     public void setController(AlimentoController controller) {
         this.controller = controller;
         this.model = this.controller.getModel();
-//        this.caracController = caracController;
-//        this.caracModel = this.caracController.getModel();
         doBindings();
     }
 
@@ -128,8 +146,18 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
         });
 
         removeCaracteristicaButton.setText("Remover Característica");
+        removeCaracteristicaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCaracteristicaButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Fechar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Salvar");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -219,17 +247,21 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void addCaracteristicaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCaracteristicaButtonActionPerformed
-        caracModel.setBackupRegistro(caracModel.getRegistroSelecionado());
-        CaracteristicaAlimento caracAlimento = new CaracteristicaAlimento();
-//        caracModel.setRegistroEditado(caracAlimento);
-        caracModel.setRegistroEditado(caracAlimento);
         new Thread(() -> {
             ManutencaoCaracteristicaAlimentoForm form = new ManutencaoCaracteristicaAlimentoForm((Frame) SwingUtilities.windowForComponent(this), true);
             form.setTitle("Adicionar Característica");
-            form.setController(caracController);
-            form.setVisible(true);
+            form.setController(this.controller);
+            form.setVisible(true);            
         }).start();
     }//GEN-LAST:event_addCaracteristicaButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void removeCaracteristicaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCaracteristicaButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeCaracteristicaButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCaracteristicaButton;
@@ -332,8 +364,15 @@ public class ManutencaoAlimentoForm extends javax.swing.JDialog {
             int row = masterTable.getSelectedRow();
             if (row >= 0) {
                 CaracteristicaAlimento c = model.getCaracteristicaAlimentos().get(row);
-                model.setBackupRegistroCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
-                model.setRegistroSelecionadoCaracteristicaAlimento(new CaracteristicaAlimento(c.getId(), c.getDescricao(), c.getValor()));
+                CaracteristicaAlimento backup = new CaracteristicaAlimento(c.getId());
+                backup.setDescricao(c.getDescricao());
+                backup.setValor(c.getValor());
+                model.setBackupRegistroCaracteristicaAlimento(backup);
+
+                CaracteristicaAlimento selecionado = new CaracteristicaAlimento(c.getId());
+                selecionado.setDescricao(c.getDescricao());
+                selecionado.setValor(c.getValor());
+                model.setRegistroSelecionadoCaracteristicaAlimento(selecionado);
             }
         }
 
