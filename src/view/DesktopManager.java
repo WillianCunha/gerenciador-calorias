@@ -15,17 +15,12 @@ import java.util.Map;
  */
 public class DesktopManager {
 
-    public static final String TELA_CADASTRO_PESO_USUARIO = "telacadastropesousuario";
-    // Adicionado para trabalhar com a TelaCadastroAlimento
-    public static final String TELA_CADASTRO_ALIMENTO = "telacadastroalimento";
-    // Adicionado para trabalhar com a TelaCadastroRefeicao
-    public static final String TELA_CADASTRO_REFEICAO = "telacadastrorefeicao";
-    // Adicionado para trabalhar com a TelaConsultaPeso
-    public static final String TELA_CONSULTA_PESO = "telaconsultapeso";
-    // Adicionado para trabalhar com a TelaConsultaAlimento
-    public static final String TELA_CONSULTA_ALIMENTO = "telaconsultaalimento";
-    // Adicionado para trabalhar com a TelaCadastroAtributo
-    public static final String TELA_CADASTRO_ATRIBUTO = "telacadastroatributo";
+    public static final String MANUTENCAO_PESO_USUARIO_VIEW = "manutencaopesousuarioview";
+    public static final String MANUTENCAO_REFEICAO_VIEW = "manutencaorefeicaoview";
+    public static final String MANUTENCAO_PESO_VIEW = "manutencaopesoview";
+    public static final String MANUTENCAO_ALIMENTO_VIEW = "manutencaoalimentoview";
+    public static final String MANUTENCAO_CARACTERISTICA_ALIMENTO_VIEW = "manutencaocaracteristicaalimentoview";
+    public static final String MANUTENCAO_DIARIO_VIEW = "manutencaodiarioview";
 
     private static Map<String, Component> windows;
 

@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 import session.SessionManager;
 import util.JPAUtil;
@@ -51,101 +52,56 @@ public class PrincipalView extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        cadastroMenu = new javax.swing.JMenu();
-        cadastroAlimentoMenuItem = new javax.swing.JMenuItem();
-        cadastroRelatorioMenuItem = new javax.swing.JMenuItem();
-        cadastroRefeiçãoMenuItem = new javax.swing.JMenuItem();
-        manutencaoPesoUsuarioMenuItem = new javax.swing.JMenuItem();
-        manutencaoUsuarioMenuItem = new javax.swing.JMenuItem();
-        consultaMenu = new javax.swing.JMenu();
-        consultaAlimentoMenuItem = new javax.swing.JMenuItem();
-        consultaRelatorioMenuItem = new javax.swing.JMenuItem();
-        consultaDiarioMenuItem = new javax.swing.JMenuItem();
-        consultaPesoMenuItem = new javax.swing.JMenuItem();
+        manutencaoMenu = new javax.swing.JMenu();
+        manutencaoAlimentoMenuItem = new javax.swing.JMenuItem();
+        manutencaoRelatorioMenuItem = new javax.swing.JMenuItem();
+        manutencaoDiarioMenuItem = new javax.swing.JMenuItem();
+        manutencaoPesoMenuItem = new javax.swing.JMenuItem();
         ajudaMenu = new javax.swing.JMenu();
         sobreMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Calorias");
 
-        cadastroMenu.setMnemonic(KeyEvent.VK_M);
-        cadastroMenu.setText("Manutenção");
+        manutencaoMenu.setMnemonic(KeyEvent.VK_C);
+        manutencaoMenu.setText("Manutenção");
 
-        cadastroAlimentoMenuItem.setMnemonic('p');
-        cadastroAlimentoMenuItem.setText("Alimento");
-        cadastroAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        manutencaoAlimentoMenuItem.setMnemonic('s');
+        manutencaoAlimentoMenuItem.setText("Alimento");
+        manutencaoAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroAlimentoMenuItemActionPerformed(evt);
+                manutencaoAlimentoMenuItemActionPerformed(evt);
             }
         });
-        cadastroMenu.add(cadastroAlimentoMenuItem);
+        manutencaoMenu.add(manutencaoAlimentoMenuItem);
 
-        cadastroRelatorioMenuItem.setMnemonic('t');
-        cadastroRelatorioMenuItem.setText("Relatório");
-        cadastroMenu.add(cadastroRelatorioMenuItem);
-
-        cadastroRefeiçãoMenuItem.setMnemonic('d');
-        cadastroRefeiçãoMenuItem.setText("Refeição");
-        cadastroRefeiçãoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        manutencaoRelatorioMenuItem.setText("Relatório");
+        manutencaoRelatorioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroRefeiçãoMenuItemActionPerformed(evt);
+                manutencaoRelatorioMenuItemActionPerformed(evt);
             }
         });
-        cadastroMenu.add(cadastroRefeiçãoMenuItem);
+        manutencaoMenu.add(manutencaoRelatorioMenuItem);
 
-        manutencaoPesoUsuarioMenuItem.setMnemonic('y');
-        manutencaoPesoUsuarioMenuItem.setText("Peso Usuário");
-        manutencaoPesoUsuarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        manutencaoDiarioMenuItem.setMnemonic('a');
+        manutencaoDiarioMenuItem.setText("Diário");
+        manutencaoDiarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manutencaoPesoUsuarioMenuItemActionPerformed(evt);
+                manutencaoDiarioMenuItemActionPerformed(evt);
             }
         });
-        cadastroMenu.add(manutencaoPesoUsuarioMenuItem);
+        manutencaoMenu.add(manutencaoDiarioMenuItem);
 
-        manutencaoUsuarioMenuItem.setText("Usuário");
-        cadastroMenu.add(manutencaoUsuarioMenuItem);
-
-        menuBar.add(cadastroMenu);
-
-        consultaMenu.setMnemonic(KeyEvent.VK_C);
-        consultaMenu.setText("Consulta");
-
-        consultaAlimentoMenuItem.setMnemonic('s');
-        consultaAlimentoMenuItem.setText("Alimento");
-        consultaAlimentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        manutencaoPesoMenuItem.setMnemonic('o');
+        manutencaoPesoMenuItem.setText("Peso");
+        manutencaoPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultaAlimentoMenuItemActionPerformed(evt);
+                manutencaoPesoMenuItemActionPerformed(evt);
             }
         });
-        consultaMenu.add(consultaAlimentoMenuItem);
+        manutencaoMenu.add(manutencaoPesoMenuItem);
 
-        consultaRelatorioMenuItem.setText("Relatório");
-        consultaRelatorioMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultaRelatorioMenuItemActionPerformed(evt);
-            }
-        });
-        consultaMenu.add(consultaRelatorioMenuItem);
-
-        consultaDiarioMenuItem.setMnemonic('a');
-        consultaDiarioMenuItem.setText("Diário");
-        consultaDiarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultaDiarioMenuItemActionPerformed(evt);
-            }
-        });
-        consultaMenu.add(consultaDiarioMenuItem);
-
-        consultaPesoMenuItem.setMnemonic('o');
-        consultaPesoMenuItem.setText("Peso");
-        consultaPesoMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultaPesoMenuItemActionPerformed(evt);
-            }
-        });
-        consultaMenu.add(consultaPesoMenuItem);
-
-        menuBar.add(consultaMenu);
+        menuBar.add(manutencaoMenu);
 
         ajudaMenu.setMnemonic(KeyEvent.VK_A);
         ajudaMenu.setText("Ajuda");
@@ -181,92 +137,58 @@ public class PrincipalView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void manutencaoPesoUsuarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoPesoUsuarioMenuItemActionPerformed
-        ManutencaoPesoUsuarioView view;
-
-        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_PESO_USUARIO)) {
-            view = (ManutencaoPesoUsuarioView) DesktopManager.get(DesktopManager.TELA_CADASTRO_PESO_USUARIO);
-            desktopPane.setSelectedFrame(view);
-            view.pack();
-        } else {
-            view = new ManutencaoPesoUsuarioView();
-            desktopPane.add(view);
-            DesktopManager.add(DesktopManager.TELA_CADASTRO_PESO_USUARIO, view);
-        }
-        view.show();
-    }//GEN-LAST:event_manutencaoPesoUsuarioMenuItemActionPerformed
-
-    private void cadastroAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroAlimentoMenuItemActionPerformed
-        TelaCadastroAlimento frame;
-
-        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_ALIMENTO)) {
-            frame = (TelaCadastroAlimento) DesktopManager.get(DesktopManager.TELA_CADASTRO_ALIMENTO);
-            desktopPane.setSelectedFrame(frame);
-            frame.pack();
-        } else {
-            frame = new TelaCadastroAlimento();
-            desktopPane.add(frame);
-            DesktopManager.add(DesktopManager.TELA_CADASTRO_ALIMENTO, frame);
-        }
-        frame.show();
-    }//GEN-LAST:event_cadastroAlimentoMenuItemActionPerformed
-
-    private void cadastroRefeiçãoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroRefeiçãoMenuItemActionPerformed
-        TelaCadastroRefeicao frame;
-
-        if (DesktopManager.contains(DesktopManager.TELA_CADASTRO_REFEICAO)) {
-            frame = (TelaCadastroRefeicao) DesktopManager.get(DesktopManager.TELA_CADASTRO_REFEICAO);
-            desktopPane.setSelectedFrame(frame);
-            frame.pack();
-        } else {
-            frame = new TelaCadastroRefeicao();
-            desktopPane.add(frame);
-            DesktopManager.add(DesktopManager.TELA_CADASTRO_REFEICAO, frame);
-        }
-        frame.show();
-    }//GEN-LAST:event_cadastroRefeiçãoMenuItemActionPerformed
-
     private void sobreMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreMenuItemActionPerformed
-        TelaSobre.main(null);
+        SobreView.main(null);
     }//GEN-LAST:event_sobreMenuItemActionPerformed
 
-    private void consultaAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaAlimentoMenuItemActionPerformed
+    private void manutencaoAlimentoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoAlimentoMenuItemActionPerformed
         ManutencaoAlimentoView frame;
 
-        if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_ALIMENTO)) {
-            frame = (ManutencaoAlimentoView) DesktopManager.get(DesktopManager.TELA_CONSULTA_ALIMENTO);
+        if (DesktopManager.contains(DesktopManager.MANUTENCAO_ALIMENTO_VIEW)) {
+            frame = (ManutencaoAlimentoView) DesktopManager.get(DesktopManager.MANUTENCAO_ALIMENTO_VIEW);
             desktopPane.setSelectedFrame(frame);
             frame.pack();
         } else {
             frame = new ManutencaoAlimentoView();
             desktopPane.add(frame);
-            DesktopManager.add(DesktopManager.TELA_CONSULTA_ALIMENTO, frame);
+            DesktopManager.add(DesktopManager.MANUTENCAO_ALIMENTO_VIEW, frame);
         }
         frame.show();
-    }//GEN-LAST:event_consultaAlimentoMenuItemActionPerformed
+    }//GEN-LAST:event_manutencaoAlimentoMenuItemActionPerformed
 
-    private void consultaRelatorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaRelatorioMenuItemActionPerformed
+    private void manutencaoRelatorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoRelatorioMenuItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_consultaRelatorioMenuItemActionPerformed
+    }//GEN-LAST:event_manutencaoRelatorioMenuItemActionPerformed
 
-    private void consultaDiarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaDiarioMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_consultaDiarioMenuItemActionPerformed
+    private void manutencaoDiarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoDiarioMenuItemActionPerformed
+        ManutencaoDiarioView frame;
+        
+        if (DesktopManager.contains(DesktopManager.MANUTENCAO_DIARIO_VIEW)) {
+            frame = (ManutencaoDiarioView) DesktopManager.get(DesktopManager.MANUTENCAO_DIARIO_VIEW);
+            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new ManutencaoDiarioView();
+            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.MANUTENCAO_DIARIO_VIEW, frame);
+        }
+        frame.show();
+    }//GEN-LAST:event_manutencaoDiarioMenuItemActionPerformed
 
-    private void consultaPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPesoMenuItemActionPerformed
+    private void manutencaoPesoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoPesoMenuItemActionPerformed
         ManutencaoPesoUsuarioView frame;
 
-        if (DesktopManager.contains(DesktopManager.TELA_CONSULTA_PESO)) {
-            frame = (ManutencaoPesoUsuarioView) DesktopManager.get(DesktopManager.TELA_CONSULTA_PESO);
+        if (DesktopManager.contains(DesktopManager.MANUTENCAO_PESO_VIEW)) {
+            frame = (ManutencaoPesoUsuarioView) DesktopManager.get(DesktopManager.MANUTENCAO_PESO_VIEW);
             desktopPane.setSelectedFrame(frame);
             frame.pack();
         } else {
             frame = new ManutencaoPesoUsuarioView();
             desktopPane.add(frame);
-            DesktopManager.add(DesktopManager.TELA_CONSULTA_PESO, frame);
+            DesktopManager.add(DesktopManager.MANUTENCAO_PESO_VIEW, frame);
         }
         frame.show();
-    }//GEN-LAST:event_consultaPesoMenuItemActionPerformed
+    }//GEN-LAST:event_manutencaoPesoMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,18 +228,12 @@ public class PrincipalView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ajudaMenu;
-    private javax.swing.JMenuItem cadastroAlimentoMenuItem;
-    private javax.swing.JMenu cadastroMenu;
-    private javax.swing.JMenuItem cadastroRefeiçãoMenuItem;
-    private javax.swing.JMenuItem cadastroRelatorioMenuItem;
-    private javax.swing.JMenuItem consultaAlimentoMenuItem;
-    private javax.swing.JMenuItem consultaDiarioMenuItem;
-    private javax.swing.JMenu consultaMenu;
-    private javax.swing.JMenuItem consultaPesoMenuItem;
-    private javax.swing.JMenuItem consultaRelatorioMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenuItem manutencaoPesoUsuarioMenuItem;
-    private javax.swing.JMenuItem manutencaoUsuarioMenuItem;
+    private javax.swing.JMenuItem manutencaoAlimentoMenuItem;
+    private javax.swing.JMenuItem manutencaoDiarioMenuItem;
+    private javax.swing.JMenu manutencaoMenu;
+    private javax.swing.JMenuItem manutencaoPesoMenuItem;
+    private javax.swing.JMenuItem manutencaoRelatorioMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem sobreMenuItem;
     // End of variables declaration//GEN-END:variables

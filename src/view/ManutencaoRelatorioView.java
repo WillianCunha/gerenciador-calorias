@@ -9,12 +9,12 @@ package view;
  *
  * @author visitante
  */
-public class TelaRelatorio extends javax.swing.JInternalFrame {
+public class ManutencaoRelatorioView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaRelatório
      */
-    public TelaRelatorio() {
+    public ManutencaoRelatorioView() {
         initComponents();
     }
 

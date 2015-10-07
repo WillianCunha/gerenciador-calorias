@@ -153,7 +153,7 @@ public class ManutencaoPesoUsuarioView extends JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Consulta Peso");
+        setTitle("Manutenção de Peso");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -244,7 +244,7 @@ public class ManutencaoPesoUsuarioView extends JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +335,7 @@ public class ManutencaoPesoUsuarioView extends JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        DesktopManager.remove(DesktopManager.TELA_CONSULTA_PESO);
+        DesktopManager.remove(DesktopManager.MANUTENCAO_PESO_VIEW);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void applyFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterButtonActionPerformed

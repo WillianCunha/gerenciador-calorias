@@ -163,7 +163,7 @@ public class TelaCadastroRefeicao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        DesktopManager.remove(DesktopManager.TELA_CADASTRO_REFEICAO);
+        DesktopManager.remove(DesktopManager.MANUTENCAO_REFEICAO_VIEW);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

@@ -123,7 +123,7 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Consulta de Alimento");
+        setTitle("Manutenção de Alimento");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -249,7 +249,7 @@ public class ManutencaoAlimentoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        DesktopManager.remove(DesktopManager.TELA_CONSULTA_ALIMENTO);
+        DesktopManager.remove(DesktopManager.MANUTENCAO_ALIMENTO_VIEW);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void filterValueFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterValueFieldKeyReleased
