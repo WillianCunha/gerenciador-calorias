@@ -21,6 +21,7 @@ public class DesktopManager {
     public static final String MANUTENCAO_ALIMENTO_VIEW = "manutencaoalimentoview";
     public static final String MANUTENCAO_CARACTERISTICA_ALIMENTO_VIEW = "manutencaocaracteristicaalimentoview";
     public static final String MANUTENCAO_DIARIO_VIEW = "manutencaodiarioview";
+    public static final String MANUTENCAO_RELATORIO_VIEW = "manutencaorelatorioview";
 
     private static Map<String, Component> windows;
 

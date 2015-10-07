@@ -157,7 +157,18 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_manutencaoAlimentoMenuItemActionPerformed
 
     private void manutencaoRelatorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoRelatorioMenuItemActionPerformed
-        // TODO add your handling code here:
+        ManutencaoRelatorioView frame;
+        
+        if (DesktopManager.contains(DesktopManager.MANUTENCAO_RELATORIO_VIEW)) {
+            frame = (ManutencaoRelatorioView) DesktopManager.get(DesktopManager.MANUTENCAO_RELATORIO_VIEW);
+            desktopPane.setSelectedFrame(frame);
+            frame.pack();
+        } else {
+            frame = new ManutencaoRelatorioView();
+            desktopPane.add(frame);
+            DesktopManager.add(DesktopManager.MANUTENCAO_RELATORIO_VIEW, frame);
+        }
+        frame.show();
     }//GEN-LAST:event_manutencaoRelatorioMenuItemActionPerformed
 
     private void manutencaoDiarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manutencaoDiarioMenuItemActionPerformed
