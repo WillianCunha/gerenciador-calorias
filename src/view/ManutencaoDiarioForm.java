@@ -6,6 +6,12 @@
 package view;
 
 import control.RefeicaoController;
+import entity.Refeicao;
+import java.awt.Frame;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
 import model.RefeicaoModel;
 
 /**
@@ -50,9 +56,9 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         cancelButton = new javax.swing.JButton();
-        updateButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
-        removeButton = new javax.swing.JButton();
+        updateRefeicaoButton = new javax.swing.JButton();
+        addRefeicaoButton = new javax.swing.JButton();
+        removeRefeicaoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,17 +72,7 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
 
         jLabel2.setText("Total Calórico:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(new RefeicaoTableModel());
         jScrollPane1.setViewportView(jTable1);
 
         cancelButton.setText("Fechar");
@@ -86,11 +82,16 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
             }
         });
 
-        updateButton.setText("Alterar");
+        updateRefeicaoButton.setText("Alterar Refeição");
 
-        addButton.setText("Adicionar");
+        addRefeicaoButton.setText("Adicionar Refeição");
+        addRefeicaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRefeicaoButtonActionPerformed(evt);
+            }
+        });
 
-        removeButton.setText("Remover");
+        removeRefeicaoButton.setText("Remover Refeição");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,6 +100,16 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addRefeicaoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeRefeicaoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updateRefeicaoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -106,19 +117,7 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)))
+                        .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,9 +134,9 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
-                    .addComponent(removeButton)
-                    .addComponent(updateButton)
-                    .addComponent(addButton))
+                    .addComponent(removeRefeicaoButton)
+                    .addComponent(updateRefeicaoButton)
+                    .addComponent(addRefeicaoButton))
                 .addContainerGap())
         );
 
@@ -148,58 +147,56 @@ public class ManutencaoDiarioForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManutencaoDiarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManutencaoDiarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManutencaoDiarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManutencaoDiarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ManutencaoDiarioForm dialog = new ManutencaoDiarioForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void addRefeicaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRefeicaoButtonActionPerformed
+        new Thread(() -> {
+            ManutencaoRefeicaoForm form = new ManutencaoRefeicaoForm((Frame) SwingUtilities.windowForComponent(this), true);
+            form.setTitle("Manutenção de Refeição");
+            form.setController(this.controller);
+            form.setVisible(true);
+        }).start();
+    }//GEN-LAST:event_addRefeicaoButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton addRefeicaoButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JFormattedTextField dataField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton removeButton;
+    private javax.swing.JButton removeRefeicaoButton;
     private javax.swing.JTextField totalField;
-    private javax.swing.JButton updateButton;
+    private javax.swing.JButton updateRefeicaoButton;
     // End of variables declaration//GEN-END:variables
+    private class RefeicaoTableModel extends AbstractTableModel {
+
+        private List<Refeicao> refeicoes;
+        private final String[] columnNames = {"ID", "Nome", "Total Calórico"};
+        private final int COLUMN_COUNT = columnNames.length;
+        
+        public RefeicaoTableModel() {
+            refeicoes = new ArrayList();
+        }
+        
+        @Override
+        public int getRowCount() {
+            return refeicoes.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return COLUMN_COUNT;
+        }
+        
+        @Override
+        public String getColumnName(int i) {
+            return columnNames[i];
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
 }

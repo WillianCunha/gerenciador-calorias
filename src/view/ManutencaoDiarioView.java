@@ -69,9 +69,9 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         closeButton = new javax.swing.JButton();
-        removeButton = new javax.swing.JButton();
-        updateButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
+        removeDiaButton = new javax.swing.JButton();
+        updateDiaButton = new javax.swing.JButton();
+        addDiaButton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -116,14 +116,14 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
             }
         });
 
-        removeButton.setText("Remover");
+        removeDiaButton.setText("Remover Dia");
 
-        updateButton.setText("Alterar");
+        updateDiaButton.setText("Alterar Dia");
 
-        addButton.setText("Adicionar");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        addDiaButton.setText("Adicionar Dia");
+        addDiaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                addDiaButtonActionPerformed(evt);
             }
         });
 
@@ -139,13 +139,13 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addDiaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updateDiaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(removeDiaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(filterCriteriaField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,9 +170,9 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closeButton)
-                    .addComponent(removeButton)
-                    .addComponent(updateButton)
-                    .addComponent(addButton))
+                    .addComponent(removeDiaButton)
+                    .addComponent(updateDiaButton)
+                    .addComponent(addDiaButton))
                 .addContainerGap())
         );
 
@@ -188,7 +188,7 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void addDiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiaButtonActionPerformed
         model.setBackupRegistro(model.getRegistroSelecionado());
         Diario diario = new Diario();
         diario.setRegistroList(Collections.emptyList());
@@ -201,11 +201,11 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
             form.setController(refeicaoController);
             form.setVisible(true);
         }).start();
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_addDiaButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton addDiaButton;
     private javax.swing.JButton applyFilterButton;
     private javax.swing.JButton clearFilterButton;
     private javax.swing.JButton closeButton;
@@ -213,8 +213,8 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField filterValueField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable masterTable;
-    private javax.swing.JButton removeButton;
-    private javax.swing.JButton updateButton;
+    private javax.swing.JButton removeDiaButton;
+    private javax.swing.JButton updateDiaButton;
     // End of variables declaration//GEN-END:variables
 
     private class DiarioTableModel extends AbstractTableModel {

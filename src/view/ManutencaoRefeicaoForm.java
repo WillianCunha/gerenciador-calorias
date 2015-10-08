@@ -6,6 +6,7 @@
 package view;
 
 import control.RefeicaoController;
+import entity.Alimento;
 import entity.Refeicao;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -30,6 +31,16 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         initComponents();
     }
 
+    private void doBindings() {
+        
+    }
+    
+    public void setController(RefeicaoController controller) {
+        this.controller = controller;
+        this.model = this.controller.getModel();
+        doBindings();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +78,11 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(masterTable);
 
         addAlimentoButton.setText("Adicionar Alimento");
+        addAlimentoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAlimentoButtonActionPerformed(evt);
+            }
+        });
 
         removeAlimentoButton.setText("Remover Alimento");
 
@@ -100,21 +116,19 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addAlimentoButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removeAlimentoButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(createAlimentoButton)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dataField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addAlimentoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeAlimentoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(createAlimentoButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -157,6 +171,10 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         }).start();
     }//GEN-LAST:event_createAlimentoButtonActionPerformed
 
+    private void addAlimentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAlimentoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addAlimentoButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAlimentoButton;
@@ -173,24 +191,29 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private class RefeicaoTableModel extends AbstractTableModel {
 
-        private List<Refeicao> refeicoes;
-        private final String[] columnNames = {"Hora", "Nome", "Total Calórico"};
+        private List<Alimento> alimentos;
+        private final String[] columnNames = {"Descrição", "Porção", "Unidade", "Total Calórico"};
         private final int COLUMN_COUNT = columnNames.length;
         
         public RefeicaoTableModel() {
-            refeicoes = new ArrayList();
+            alimentos = new ArrayList();
         }
         
         @Override
         public int getRowCount() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return alimentos.size();
         }
 
         @Override
         public int getColumnCount() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return COLUMN_COUNT;
         }
 
+        @Override
+        public String getColumnName(int i) {
+            return columnNames[i];
+        }
+        
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
