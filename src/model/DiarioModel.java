@@ -202,9 +202,9 @@ public class DiarioModel extends BindableModel {
         firePropertyChange("diario", null, diario);
     }
 
-    public void setRegistroEditado(Diario diario) {
-        System.out.println("teste");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setRegistroEditado(Diario registroEditado) {
+        this.registroEditado = registroEditado;
+        firePropertyChange("registroEditado", null, registroEditado);
     }
     
     public Diario getRegistroSelecionado() {
