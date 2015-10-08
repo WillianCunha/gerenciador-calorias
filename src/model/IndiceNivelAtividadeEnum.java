@@ -9,42 +9,37 @@ package model;
  *
  * @author visitante
  */
-public enum NivelAtividadeFisicaEnum {
+public enum IndiceNivelAtividadeEnum {
 
     /**
      *
      */
-    BASAL(0, "Basal"),
-
+    BASAL(1.0f, "Basal"),
     /**
      *
      */
-    SEDENTARIO(1, "Sedentário"),
-
+    SEDENTARIO(1.2f, "Sedentário"),
     /**
      *
      */
-    ATIVIDADE_LEVE(2, "Atividade Leve"),
-
+    ATIVIDADE_LEVE(1.375f, "Atividade Leve"),
     /**
      *
      */
-    ATIVIDADE_MODERADA(3, "Atividade Moderada"),
-
+    ATIVIDADE_MODERADA(1.55f, "Atividade Moderada"),
     /**
      *
      */
-    ATIVIDADE_INTENSA(4, "Atividade Intesa"),
-
+    ATIVIDADE_INTENSA(1.725f, "Atividade Intesa"),
     /**
      *
      */
-    ATIVIDADE_MUITO_INTENSA(5, "Atividade Muito Intensa");
+    ATIVIDADE_MUITO_INTENSA(1.9f, "Atividade Muito Intensa");
 
-    private final int valor;
+    private final float valor;
     private final String descricao;
 
-    NivelAtividadeFisicaEnum(int valor, String descricao) {
+    IndiceNivelAtividadeEnum(float valor, String descricao) {
         this.valor = valor;
         this.descricao = descricao;
     }
@@ -53,7 +48,7 @@ public enum NivelAtividadeFisicaEnum {
      *
      * @return
      */
-    public int getValor() {
+    public float getValor() {
         return valor;
     }
 

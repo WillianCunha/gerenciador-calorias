@@ -9,7 +9,10 @@ import entity.Peso;
 import entity.Usuario;
 import exception.BusinessException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 import util.JPAUtil;
@@ -97,6 +100,20 @@ public class PesoUsuarioDAO implements IDAO<Peso> {
         List<Peso> result = query.getResultList();
         manager.close();
         return result;
+    }
+    
+    public Peso findPesoAtualUsuario(Usuario usuario) {
+        TypedQuery<Peso> query = manager.createQuery("from Peso p where p.usuario = :usuario order by p.data desc", Peso.class)
+                .setParameter("usuario", usuario)
+                .setMaxResults(1);
+        
+        Peso peso = null;
+        try {
+            peso = query.getSingleResult();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(PesoUsuarioDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+        }
+        return peso;
     }
 
 }

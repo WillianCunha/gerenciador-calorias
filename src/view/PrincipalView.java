@@ -5,8 +5,10 @@
  */
 package view;
 
+import control.RelatorioController;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import model.RelatorioModel;
 import session.SessionManager;
 import util.JPAUtil;
 
@@ -16,11 +18,13 @@ import util.JPAUtil;
  */
 public class PrincipalView extends javax.swing.JFrame {
 
+    private RelatorioModel model = new RelatorioModel();
+    private RelatorioController controller = new RelatorioController(model);
     /**
      * Creates new form TelaPrincipal
      */
     public PrincipalView() {        
-        init();
+        init();        
         initComponents();        
         doLogin();
     }

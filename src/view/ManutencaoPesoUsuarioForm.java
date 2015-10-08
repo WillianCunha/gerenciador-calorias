@@ -159,7 +159,7 @@ public class ManutencaoPesoUsuarioForm extends javax.swing.JDialog {
             }
         });
 
-        cancelButton.setText("Fechar");
+        cancelButton.setText("Cancelar");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);

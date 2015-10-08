@@ -7,9 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +33,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByAltura", query = "SELECT u FROM Usuario u WHERE u.altura = :altura"),
     @NamedQuery(name = "Usuario.findByDataNascimento", query = "SELECT u FROM Usuario u WHERE u.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")})
+    @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero"),
+    @NamedQuery(name = "Usuario.findByNivelAtividade", query = "SELECT u FROM Usuario u WHERE u.nivelAtividade = :nivelAtividade")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,10 +59,8 @@ public class Usuario implements Serializable {
     private Date dataNascimento;
     @Column(name = "genero")
     private Character genero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Peso> pesoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Diario> diarioList;
+    @Column(name = "nivel_atividade")
+    private Float nivelAtividade;
 
     public Usuario() {
     }
@@ -136,20 +132,12 @@ public class Usuario implements Serializable {
         this.genero = genero;
     }
 
-    public List<Peso> getPesoList() {
-        return pesoList;
+    public Float getNivelAtividade() {
+        return nivelAtividade;
     }
 
-    public void setPesoList(List<Peso> pesoList) {
-        this.pesoList = pesoList;
-    }
-
-    public List<Diario> getDiarioList() {
-        return diarioList;
-    }
-
-    public void setDiarioList(List<Diario> diarioList) {
-        this.diarioList = diarioList;
+    public void setNivelAtividade(Float nivelAtividade) {
+        this.nivelAtividade = nivelAtividade;
     }
 
     @Override
