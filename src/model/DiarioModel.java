@@ -203,6 +203,7 @@ public class DiarioModel extends BindableModel {
     }
 
     public void setRegistroEditado(Diario diario) {
+        System.out.println("teste");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
