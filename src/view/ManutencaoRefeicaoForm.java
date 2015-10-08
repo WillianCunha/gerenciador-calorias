@@ -6,8 +6,12 @@
 package view;
 
 import control.RefeicaoController;
+import entity.Refeicao;
 import java.awt.Frame;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
 import model.RefeicaoModel;
 
 /**
@@ -40,7 +44,7 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         dataField = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        masterTable = new javax.swing.JTable();
         addAlimentoButton = new javax.swing.JButton();
         removeAlimentoButton = new javax.swing.JButton();
         createAlimentoButton = new javax.swing.JButton();
@@ -59,18 +63,8 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        masterTable.setModel(new RefeicaoTableModel());
+        jScrollPane1.setViewportView(masterTable);
 
         addAlimentoButton.setText("Adicionar Alimento");
 
@@ -172,9 +166,35 @@ public class ManutencaoRefeicaoForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable masterTable;
     private javax.swing.JTextField nomeField;
     private javax.swing.JButton removeAlimentoButton;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+    private class RefeicaoTableModel extends AbstractTableModel {
+
+        private List<Refeicao> refeicoes;
+        private final String[] columnNames = {"Hora", "Nome", "Total Calórico"};
+        private final int COLUMN_COUNT = columnNames.length;
+        
+        public RefeicaoTableModel() {
+            refeicoes = new ArrayList();
+        }
+        
+        @Override
+        public int getRowCount() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getColumnCount() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
 }

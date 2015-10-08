@@ -202,4 +202,21 @@ public class DiarioModel extends BindableModel {
         firePropertyChange("diario", null, diario);
     }
 
+    public void setRegistroEditado(Diario registroEditado) {
+        this.registroEditado = registroEditado;
+        firePropertyChange("registroEditado", null, registroEditado);
+    }
+    
+    public Diario getRegistroSelecionado() {
+        return registroSelecionado;
+    }
+
+    public void setBackupRegistro(Diario backupRegistro) {
+        if (backupRegistro == null) {
+            this.backupRegistro = null;
+        } else {
+            this.backupRegistro = backupRegistro;
+        }
+    }
+
 }
