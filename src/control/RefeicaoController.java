@@ -35,5 +35,9 @@ public class RefeicaoController {
         RefeicaoDAO dao = new RefeicaoDAO();
         dao.save(refeicao);
     }
+
+    public RefeicaoModel getModel() {
+        return model;
+    }
     
 }

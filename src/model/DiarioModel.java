@@ -202,4 +202,20 @@ public class DiarioModel extends BindableModel {
         firePropertyChange("diario", null, diario);
     }
 
+    public void setRegistroEditado(Diario diario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Diario getRegistroSelecionado() {
+        return registroSelecionado;
+    }
+
+    public void setBackupRegistro(Diario backupRegistro) {
+        if (backupRegistro == null) {
+            this.backupRegistro = null;
+        } else {
+            this.backupRegistro = backupRegistro;
+        }
+    }
+
 }

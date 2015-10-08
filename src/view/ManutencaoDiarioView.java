@@ -6,20 +6,25 @@
 package view;
 
 import control.DiarioController;
+import control.RefeicaoController;
 import entity.Diario;
 import entity.Refeicao;
 import entity.Registro;
+import java.awt.Frame;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import model.DiarioModel;
+import model.RefeicaoModel;
 import org.jdesktop.beansbinding.BindingGroup;
 import session.SessionManager;
 
@@ -31,6 +36,8 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
 
     private DiarioModel model = new DiarioModel();
     private DiarioController controller = new DiarioController(model);
+    private RefeicaoModel refeicaoModel = new RefeicaoModel();
+    private RefeicaoController refeicaoController = new RefeicaoController(refeicaoModel);
     
     /**
      * Creates new form ManutencaoDiarioView
@@ -114,6 +121,11 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
         updateButton.setText("Alterar");
 
         addButton.setText("Adicionar");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +187,21 @@ public class ManutencaoDiarioView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        model.setBackupRegistro(model.getRegistroSelecionado());
+        Diario diario = new Diario();
+        diario.setRegistroList(Collections.emptyList());
+        diario.setUsuario(SessionManager.getUsuarioLogado());
+        diario.setNome("Meu Diário");
+        model.setRegistroEditado(diario);
+        new Thread(() -> {
+            ManutencaoDiarioForm form = new ManutencaoDiarioForm((Frame) SwingUtilities.windowForComponent(this), true);
+            form.setTitle("Manutenção do Diário");
+            form.setController(refeicaoController);
+            form.setVisible(true);
+        }).start();
+    }//GEN-LAST:event_addButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
